@@ -55,8 +55,6 @@ budgetino/
 
 ## Getting Started
 
-> 🚧 Project is in planning phase. Setup instructions will be added in M0.
-
 ### Prerequisites
 
 - Node.js 20+
@@ -68,9 +66,32 @@ budgetino/
 ```bash
 git clone https://github.com/vukovicpavle/budgetino.git
 cd budgetino
-# The commands below require the Turborepo/pnpm workspace scaffold (M0)
+
+# Install all workspace dependencies
 pnpm install
+
+# Start all apps in development mode
 pnpm dev
+
+# Or start a specific app
+pnpm dev:web      # Web only (Next.js on http://localhost:3000)
+pnpm dev:mobile   # Mobile only (Expo)
+```
+
+### Other Commands
+
+```bash
+# Build all apps and packages
+pnpm build
+
+# Type-check all packages
+pnpm type-check
+
+# Run all tests (not yet wired up — test scripts will be added per package in subsequent milestones)
+pnpm test
+
+# Lint all packages
+pnpm lint
 ```
 
 ## Milestones

@@ -1,0 +1,19 @@
+{
+  "name": "@budgetino/shared",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./i18n": "./src/i18n/index.ts",
+    "./i18n/locales/en.json": "./src/i18n/locales/en.json"
+  },
+  "scripts": {
+    "lint": "echo \"No lint configured yet\"",
+    "type-check": "tsc --noEmit",
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.10",
+    "typescript": "^5.7.3"
+  }
+}

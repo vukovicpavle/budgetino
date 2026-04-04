@@ -1,0 +1,107 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "back": "Back",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "confirm": "Confirm"
+  },
+  "nav": {
+    "budgets": "Budgets",
+    "expenses": "Expenses",
+    "subscriptions": "Subscriptions",
+    "analytics": "Analytics",
+    "settings": "Settings"
+  },
+  "budget": {
+    "title": "My Budgets",
+    "add": "Add Budget",
+    "edit": "Edit Budget",
+    "delete": "Delete Budget",
+    "name": "Budget Name",
+    "amount": "Budget Amount",
+    "currency": "Currency",
+    "period": "Period",
+    "startDate": "Start Date",
+    "remaining": "Remaining: {amount}",
+    "spent": "Spent: {amount}",
+    "periods": {
+      "weekly": "Weekly",
+      "biweekly": "Bi-weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "yearly": "Yearly"
+    }
+  },
+  "expense": {
+    "title": "Expenses",
+    "add": "Add Expense",
+    "edit": "Edit Expense",
+    "delete": "Delete Expense",
+    "amount": "Amount",
+    "currency": "Currency",
+    "category": "Category",
+    "description": "Description",
+    "date": "Date"
+  },
+  "subscription": {
+    "title": "Subscriptions",
+    "add": "Add Subscription",
+    "edit": "Edit Subscription",
+    "cancel": "Cancel Subscription",
+    "name": "Name",
+    "amount": "Amount",
+    "currency": "Currency",
+    "frequency": "Frequency",
+    "nextBillingDate": "Next Billing Date",
+    "active": "Active",
+    "inactive": "Inactive",
+    "frequencies": {
+      "weekly": "Weekly",
+      "biweekly": "Bi-weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "yearly": "Yearly"
+    }
+  },
+  "analytics": {
+    "title": "Analytics",
+    "spendingByCategory": "Spending by Category",
+    "spendingOverTime": "Spending Over Time",
+    "budgetVsActual": "Budget vs Actual",
+    "subscriptionCost": "Subscription Costs",
+    "totalSpent": "Total Spent",
+    "totalBudget": "Total Budget"
+  },
+  "category": {
+    "title": "Categories",
+    "add": "Add Category",
+    "edit": "Edit Category",
+    "delete": "Delete Category",
+    "name": "Category Name",
+    "color": "Color",
+    "icon": "Icon"
+  },
+  "settings": {
+    "title": "Settings",
+    "defaultCurrency": "Default Currency",
+    "theme": "Theme",
+    "language": "Language",
+    "themes": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    }
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signInWithGitHub": "Sign in with GitHub",
+    "welcome": "Welcome to Budgetino"
+  }
+}

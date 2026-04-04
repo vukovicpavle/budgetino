@@ -1,0 +1,13 @@
+{
+  "extends": "../../tooling/typescript/nextjs.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./app/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
