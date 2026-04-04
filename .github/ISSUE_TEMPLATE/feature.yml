@@ -1,0 +1,157 @@
+name: "✨ Feature Request"
+description: "Propose a new feature for Budgetino"
+title: "feat: "
+labels: ["feature", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Request
+        Please fill out **all sections** before this issue is marked as `ready`.
+        An issue missing any section will not be picked up for development.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: "A clear, concise description of what this feature does and why it's needed."
+      placeholder: "As a user, I want to... so that..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: architecture-plan
+    attributes:
+      label: Architecture Plan
+      description: |
+        Describe the technical approach:
+        - Which layers are affected (DB, API, UI)?
+        - New tables, columns, or migrations needed?
+        - New API routes or tRPC procedures?
+        - New components or screens?
+        - How does this interact with existing features?
+      placeholder: |
+        ### Database
+        - Add `subscriptions` table with columns: ...
+
+        ### API (tRPC)
+        - New router: `subscription.create`, `subscription.list`
+
+        ### UI
+        - New screen: `SubscriptionListScreen`
+        - Reuse `CategoryPicker` component
+
+        ### i18n
+        - New translation keys: `subscription.title`, `subscription.add`, ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: ui-ux-direction
+    attributes:
+      label: UI/UX Direction
+      description: |
+        Describe the user-facing design:
+        - Wireframes, mockups, or sketches (attach images or link to Figma)
+        - User flow (step-by-step interaction)
+        - Responsive behavior (mobile vs web)
+        - Which shadcn/ui components to use
+        - Accessibility considerations
+      placeholder: |
+        ### User Flow
+        1. User navigates to Subscriptions tab
+        2. Taps "Add Subscription"
+        3. Fills form: name, amount, currency, frequency, category
+        4. Confirms → subscription appears in list
+
+        ### Components
+        - Use `Dialog` for add/edit form
+        - Use `Card` for subscription list items
+        - Use `Badge` for frequency label
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: |
+        List specific, testable criteria that must be met for this feature to be considered complete.
+        Use checkbox format.
+      placeholder: |
+        - [ ] User can create a new subscription with name, amount, currency, and frequency
+        - [ ] Subscription appears in the subscription list
+        - [ ] Subscription amount is auto-deducted from the linked budget on the billing date
+        - [ ] User can edit and delete a subscription
+        - [ ] Form validates required fields and shows error messages
+        - [ ] Works on both web (Next.js) and mobile (Expo)
+    validations:
+      required: true
+
+  - type: textarea
+    id: definition-of-done
+    attributes:
+      label: Definition of Done
+      description: |
+        Checklist of quality gates that must pass before the issue can be closed.
+      value: |
+        - [ ] Code follows the [Code Style Guide](../../docs/CONTRIBUTING.md)
+        - [ ] New source files under `apps/` and `packages/` are kebab-case (unless required otherwise by tooling/framework conventions)
+        - [ ] Components are composable and reusable
+        - [ ] All user-facing strings use translation keys (`t()`) — no hardcoded text
+        - [ ] Unit tests written and passing (Vitest)
+        - [ ] E2E tests written and passing (Playwright for web, Maestro for mobile)
+        - [ ] No TypeScript errors (`tsc --noEmit`)
+        - [ ] Linting passes (`eslint`, `prettier`)
+        - [ ] PR follows conventional commits
+        - [ ] CI/CD pipeline passes
+        - [ ] Reviewed and approved
+        - [ ] Documentation updated (if applicable)
+        - [ ] i18n: all new strings added to `en.json` locale file
+    validations:
+      required: true
+
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of Scope
+      description: "Explicitly list what is NOT part of this issue to prevent scope creep."
+      placeholder: "- Bank API integration\n- CSV export\n- Shared budgets"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: milestone
+    attributes:
+      label: Target Milestone
+      description: "Which milestone does this belong to?"
+      options:
+        - "M0: Project Setup"
+        - "M1: Budget Management"
+        - "M2: Subscription Tracking"
+        - "M3: Dashboard & Analytics"
+        - "M4: Notifications & Polish"
+        - "M5: Launch Prep"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - "P0 - Critical (blocks other work)"
+        - "P1 - High (core MVP feature)"
+        - "P2 - Medium (important but not blocking)"
+        - "P3 - Low (nice to have)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: "List any issues that must be completed before this one can start."
+      placeholder: "- #12 Database schema setup\n- #15 Auth implementation"
+    validations:
+      required: false
