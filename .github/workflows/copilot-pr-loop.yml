@@ -65,28 +65,51 @@ jobs:
           OWNER="${{ github.repository_owner }}"
           REPO="${{ github.event.repository.name }}"
 
-          RESULT=$(gh api graphql \
-            -f query='
-              query($owner: String!, $repo: String!, $pr: Int!) {
-                repository(owner: $owner, name: $repo) {
-                  pullRequest(number: $pr) {
-                    reviewThreads(first: 100) {
-                      nodes {
-                        id
-                        isResolved
-                        isOutdated
+          ALL_THREADS='[]'
+          CURSOR=""
+
+          while :; do
+            RESULT=$(gh api graphql \
+              -f query='
+                query($owner: String!, $repo: String!, $pr: Int!, $cursor: String) {
+                  repository(owner: $owner, name: $repo) {
+                    pullRequest(number: $pr) {
+                      reviewThreads(first: 100, after: $cursor) {
+                        nodes {
+                          id
+                          isResolved
+                          isOutdated
+                        }
+                        pageInfo {
+                          hasNextPage
+                          endCursor
+                        }
                       }
                     }
                   }
                 }
-              }
-            ' \
-            -f owner="$OWNER" \
-            -f repo="$REPO" \
-            -F pr="$PR_NUMBER")
+              ' \
+              -f owner="$OWNER" \
+              -f repo="$REPO" \
+              -F pr="$PR_NUMBER" \
+              -f cursor="$CURSOR")
 
-          URLS=$(echo "$RESULT" | jq -r '
-            [.data.repository.pullRequest.reviewThreads.nodes[]
+            PAGE_THREADS=$(echo "$RESULT" | jq '.data.repository.pullRequest.reviewThreads.nodes')
+            ALL_THREADS=$(jq -cn \
+              --argjson existing "$ALL_THREADS" \
+              --argjson page "$PAGE_THREADS" \
+              '$existing + $page')
+
+            HAS_NEXT_PAGE=$(echo "$RESULT" | jq -r '.data.repository.pullRequest.reviewThreads.pageInfo.hasNextPage')
+            if [ "$HAS_NEXT_PAGE" != "true" ]; then
+              break
+            fi
+
+            CURSOR=$(echo "$RESULT" | jq -r '.data.repository.pullRequest.reviewThreads.pageInfo.endCursor')
+          done
+
+          URLS=$(echo "$ALL_THREADS" | jq -r '
+            [.[]
               | select(.isResolved == false and .isOutdated == false)
               | .id]
             | sort | .[]')
