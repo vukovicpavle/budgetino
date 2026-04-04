@@ -15,13 +15,16 @@ on:
 
 # GITHUB_TOKEN needs write access to pull-requests so it can post comments,
 # request reviewers, and apply labels. Contents read is required for commit
-# status checks. If assigning the Copilot reviewer requires a PAT, set the
-# COPILOT_REVIEW_TOKEN repository secret and the request-review step will use
-# it automatically.
+# data access, while checks/statuses read is required for querying CI state
+# via the Check Runs and Commit Statuses APIs. If assigning the Copilot
+# reviewer requires a PAT, set the COPILOT_REVIEW_TOKEN repository secret
+# and the request-review step will use it automatically.
 permissions:
   pull-requests: write
   contents: read
   issues: write
+  checks: read
+  statuses: read
 
 # Prevent parallel runs on the same PR so stall-counter updates are
 # serialised. Runs are queued, not cancelled.
@@ -69,30 +72,58 @@ jobs:
           CURSOR=""
 
           while :; do
-            RESULT=$(gh api graphql \
-              -f query='
-                query($owner: String!, $repo: String!, $pr: Int!, $cursor: String) {
-                  repository(owner: $owner, name: $repo) {
-                    pullRequest(number: $pr) {
-                      reviewThreads(first: 100, after: $cursor) {
-                        nodes {
-                          id
-                          isResolved
-                          isOutdated
-                        }
-                        pageInfo {
-                          hasNextPage
-                          endCursor
+            # Pass cursor=null for the first page; GitHub GraphQL rejects after: ""
+            if [ -z "$CURSOR" ]; then
+              RESULT=$(gh api graphql \
+                -f query='
+                  query($owner: String!, $repo: String!, $pr: Int!, $cursor: String) {
+                    repository(owner: $owner, name: $repo) {
+                      pullRequest(number: $pr) {
+                        reviewThreads(first: 100, after: $cursor) {
+                          nodes {
+                            id
+                            isResolved
+                            isOutdated
+                          }
+                          pageInfo {
+                            hasNextPage
+                            endCursor
+                          }
                         }
                       }
                     }
                   }
-                }
-              ' \
-              -f owner="$OWNER" \
-              -f repo="$REPO" \
-              -F pr="$PR_NUMBER" \
-              -f cursor="$CURSOR")
+                ' \
+                -f owner="$OWNER" \
+                -f repo="$REPO" \
+                -F pr="$PR_NUMBER" \
+                -F cursor=null)
+            else
+              RESULT=$(gh api graphql \
+                -f query='
+                  query($owner: String!, $repo: String!, $pr: Int!, $cursor: String) {
+                    repository(owner: $owner, name: $repo) {
+                      pullRequest(number: $pr) {
+                        reviewThreads(first: 100, after: $cursor) {
+                          nodes {
+                            id
+                            isResolved
+                            isOutdated
+                          }
+                          pageInfo {
+                            hasNextPage
+                            endCursor
+                          }
+                        }
+                      }
+                    }
+                  }
+                ' \
+                -f owner="$OWNER" \
+                -f repo="$REPO" \
+                -F pr="$PR_NUMBER" \
+                -f cursor="$CURSOR")
+            fi
 
             PAGE_THREADS=$(echo "$RESULT" | jq '.data.repository.pullRequest.reviewThreads.nodes')
             ALL_THREADS=$(jq -cn \
@@ -286,8 +317,11 @@ jobs:
         if: steps.ready_check.outputs.ready == 'true'
         run: |
           READY_MARKER="<!-- copilot-pr-loop:ready-to-merge -->"
-          READY_BODY="${READY_MARKER}
-          ✅ Ready to merge — all review threads are resolved and all checks have passed."
+          READY_BODY=$(cat <<EOF
+${READY_MARKER}
+✅ Ready to merge — all review threads are resolved and all checks have passed.
+EOF
+          )
 
           # Avoid posting duplicate comments by upserting an existing marker.
           EXISTING_COMMENT_ID=$(gh api --paginate \
