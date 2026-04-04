@@ -87,7 +87,7 @@ pnpm build
 # Type-check all packages
 pnpm type-check
 
-# Run all tests
+# Run all tests (not yet wired up — test scripts will be added per package in subsequent milestones)
 pnpm test
 
 # Lint all packages
