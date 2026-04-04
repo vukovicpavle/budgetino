@@ -1,0 +1,6 @@
+{
+  "name": "@budgetino/tailwind-config",
+  "version": "0.0.0",
+  "private": true,
+  "files": ["index.ts"]
+}

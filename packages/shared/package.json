@@ -1,0 +1,17 @@
+{
+  "name": "@budgetino/shared",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./i18n": "./src/i18n/index.ts"
+  },
+  "scripts": {
+    "lint": "echo \"No lint configured yet\"",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
