@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         ## Feature Request
-        Please fill out **all sections** before this issue is marked as `Ready`.
+        Please fill out **all sections** before this issue is marked as `ready`.
         An issue missing any section will not be picked up for development.
 
   - type: textarea
@@ -96,7 +96,7 @@ body:
         Checklist of quality gates that must pass before the issue can be closed.
       value: |
         - [ ] Code follows the [Code Style Guide](../docs/CONTRIBUTING.md)
-        - [ ] All files are kebab-case
+        - [ ] New source files under `apps/` and `packages/` are kebab-case (unless required otherwise by tooling/framework conventions)
         - [ ] Components are composable and reusable
         - [ ] All user-facing strings use translation keys (`t()`) — no hardcoded text
         - [ ] Unit tests written and passing (Vitest)

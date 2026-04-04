@@ -88,11 +88,11 @@ pnpm dev
 Please read the [Contributing Guide](docs/CONTRIBUTING.md) before making any changes.
 
 **Key rules:**
-- All files must be `kebab-case`
+- New app/package source files should use `kebab-case` where applicable; standard repo/documentation filenames such as `README.md` and GitHub template files are allowed exceptions
 - All components must be composable (shadcn-style)
 - Commits and PR titles must follow [Conventional Commits](https://www.conventionalcommits.org/)
 - All CI/CD checks must pass before merge
-- Issues must have all sections filled and `Ready` label before starting work
+- Issues must have all sections filled and `ready` label before starting work
 
 ## License
 

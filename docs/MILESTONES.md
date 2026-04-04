@@ -1,7 +1,7 @@
 # Budgetino — Milestones & Issues
 
 > This document defines all milestones and their associated GitHub issues.
-> Each issue must have all required sections filled before receiving the `Ready` label.
+> Each issue must have all required sections filled before receiving the `ready` label.
 
 ---
 

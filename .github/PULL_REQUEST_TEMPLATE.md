@@ -48,7 +48,7 @@ Closes #<!-- issue number -->
 
 - [ ] PR title follows [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `refactor:`, etc.)
 - [ ] Code follows the [Code Style Guide](docs/CONTRIBUTING.md)
-- [ ] All files use kebab-case naming
+- [ ] New/updated app/package source files use kebab-case naming (excluding standard exceptions such as `README.md`, `.github/*`, and tool/framework config files)
 - [ ] No TypeScript errors (`tsc --noEmit`)
 - [ ] Linting passes (`eslint` + `prettier`)
 - [ ] All CI/CD checks pass
