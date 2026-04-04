@@ -1,0 +1,249 @@
+name: Copilot PR Review Loop
+
+# Drives every PR toward a mergeable state by automating the Copilot review
+# loop. On each push the workflow requests a Copilot review; on each submitted
+# review it checks for unresolved threads and instructs Copilot to address
+# them. Once all threads are resolved and every CI check is green the workflow
+# posts a "Ready to merge" comment. A stall guard fires after five consecutive
+# runs with identical unresolved threads and no new push.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  pull_request_review:
+    types: [submitted]
+
+# GITHUB_TOKEN needs write access to pull-requests so it can post comments,
+# request reviewers, and apply labels. Contents read is required for commit
+# status checks. If assigning the Copilot reviewer requires a PAT, set the
+# COPILOT_REVIEW_TOKEN repository secret and the request-review step will use
+# it automatically.
+permissions:
+  pull-requests: write
+  contents: read
+  issues: write
+
+# Prevent parallel runs on the same PR so stall-counter updates are
+# serialised. Runs are queued, not cancelled.
+concurrency:
+  group: copilot-pr-loop-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  copilot-review-loop:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+
+    steps:
+      # ------------------------------------------------------------------ #
+      # 1. REQUEST COPILOT REVIEW (on every push / synchronize event)       #
+      # ------------------------------------------------------------------ #
+      - name: Request Copilot review
+        if: github.event_name == 'pull_request'
+        # Use the PAT stored in COPILOT_REVIEW_TOKEN when available; the
+        # default GITHUB_TOKEN is tried first but may lack the required
+        # scope for requesting the Copilot reviewer.
+        env:
+          GH_TOKEN: ${{ secrets.COPILOT_REVIEW_TOKEN || github.token }}
+        run: |
+          gh pr edit "$PR_NUMBER" \
+            --add-reviewer copilot-pull-request-reviewer \
+            --repo "${{ github.repository }}" || true
+
+      # ------------------------------------------------------------------ #
+      # 2. FETCH UNRESOLVED, NON-OUTDATED REVIEW THREADS                   #
+      # ------------------------------------------------------------------ #
+      - name: Fetch unresolved review threads
+        id: threads
+        run: |
+          OWNER="${{ github.repository_owner }}"
+          REPO="${{ github.event.repository.name }}"
+
+          RESULT=$(gh api graphql \
+            -f query='
+              query($owner: String!, $repo: String!, $pr: Int!) {
+                repository(owner: $owner, name: $repo) {
+                  pullRequest(number: $pr) {
+                    reviewThreads(first: 100) {
+                      nodes {
+                        url
+                        isResolved
+                        isOutdated
+                      }
+                    }
+                  }
+                }
+              }
+            ' \
+            -f owner="$OWNER" \
+            -f repo="$REPO" \
+            -F pr="$PR_NUMBER")
+
+          URLS=$(echo "$RESULT" | jq -r '
+            [.data.repository.pullRequest.reviewThreads.nodes[]
+              | select(.isResolved == false and .isOutdated == false)
+              | .url]
+            | sort | .[]')
+
+          if [ -z "$URLS" ]; then
+            COUNT=0
+            HASH="empty"
+          else
+            COUNT=$(echo "$URLS" | wc -l)
+            HASH=$(printf '%s' "$URLS" | sha256sum | cut -d' ' -f1)
+          fi
+
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "hash=$HASH" >> "$GITHUB_OUTPUT"
+          {
+            echo "urls<<EOF"
+            echo "$URLS"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      # ------------------------------------------------------------------ #
+      # 3. INSTRUCT COPILOT TO ADDRESS UNRESOLVED THREADS                  #
+      #    (only on pull_request_review events when threads exist)          #
+      # ------------------------------------------------------------------ #
+      - name: Post Copilot assignment comment
+        if: |
+          github.event_name == 'pull_request_review' &&
+          steps.threads.outputs.count != '0'
+        run: |
+          gh pr comment "$PR_NUMBER" \
+            --repo "${{ github.repository }}" \
+            --body "@copilot please address each of the suggestions above and push the changes to this branch before merging."
+
+      # ------------------------------------------------------------------ #
+      # 4. STALL DETECTION                                                  #
+      #    State is persisted in a hidden tracking comment on the PR.       #
+      # ------------------------------------------------------------------ #
+      - name: Fetch stall-tracking comment
+        id: stall_fetch
+        run: |
+          DATA=$(gh api \
+            "repos/${{ github.repository }}/issues/$PR_NUMBER/comments" \
+            --jq '[.[] | select(.body | startswith("<!-- copilot-pr-loop-stall -->"))] | last')
+
+          COMMENT_ID=$(echo "$DATA" | jq -r '.id // empty')
+          BODY=$(echo "$DATA" | jq -r '.body // ""')
+
+          PREV_HASH=$(printf '%s\n' "$BODY" | sed -n 's/^hash://p')
+          PREV_COUNT=$(printf '%s\n' "$BODY" | sed -n 's/^count://p')
+          PREV_SHA=$(printf '%s\n' "$BODY" | sed -n 's/^sha://p')
+
+          echo "comment_id=${COMMENT_ID}" >> "$GITHUB_OUTPUT"
+          echo "prev_hash=${PREV_HASH}" >> "$GITHUB_OUTPUT"
+          echo "prev_count=${PREV_COUNT:-0}" >> "$GITHUB_OUTPUT"
+          echo "prev_sha=${PREV_SHA}" >> "$GITHUB_OUTPUT"
+
+      - name: Compute stall count
+        id: stall
+        run: |
+          CURRENT_HASH="${{ steps.threads.outputs.hash }}"
+          CURRENT_COUNT="${{ steps.threads.outputs.count }}"
+          PREV_HASH="${{ steps.stall_fetch.outputs.prev_hash }}"
+          PREV_COUNT="${{ steps.stall_fetch.outputs.prev_count }}"
+          PREV_SHA="${{ steps.stall_fetch.outputs.prev_sha }}"
+
+          if [ "$CURRENT_COUNT" = "0" ]; then
+            # All threads resolved — reset the counter
+            NEW_COUNT=0
+          elif [ "$CURRENT_HASH" = "$PREV_HASH" ] && [ "$HEAD_SHA" = "$PREV_SHA" ]; then
+            # Same unresolved threads, same HEAD (no new push) — increment
+            NEW_COUNT=$(( PREV_COUNT > 0 ? PREV_COUNT + 1 : 1 ))
+          else
+            # Either new threads or a new push — reset
+            NEW_COUNT=0
+          fi
+
+          echo "new_count=$NEW_COUNT" >> "$GITHUB_OUTPUT"
+          if [ "$NEW_COUNT" -ge 5 ]; then
+            echo "is_stalled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_stalled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Update stall-tracking comment
+        run: |
+          BODY=$(printf '<!-- copilot-pr-loop-stall -->\nhash:%s\ncount:%s\nsha:%s' \
+            "${{ steps.threads.outputs.hash }}" \
+            "${{ steps.stall.outputs.new_count }}" \
+            "$HEAD_SHA")
+
+          COMMENT_ID="${{ steps.stall_fetch.outputs.comment_id }}"
+
+          if [ -n "$COMMENT_ID" ]; then
+            gh api "repos/${{ github.repository }}/issues/comments/$COMMENT_ID" \
+              -X PATCH \
+              -f body="$BODY"
+          else
+            gh pr comment "$PR_NUMBER" \
+              --repo "${{ github.repository }}" \
+              --body "$BODY"
+          fi
+
+      - name: Apply stalled label and request human intervention
+        if: steps.stall.outputs.is_stalled == 'true'
+        run: |
+          gh pr edit "$PR_NUMBER" \
+            --add-label stalled \
+            --repo "${{ github.repository }}" || true
+          gh pr comment "$PR_NUMBER" \
+            --repo "${{ github.repository }}" \
+            --body "⚠️ This PR appears to be stalled — the same unresolved review threads have persisted across 5 consecutive workflow runs with no new push. Human intervention is required to resolve the remaining threads and unblock this PR."
+
+      # ------------------------------------------------------------------ #
+      # 5. READY-TO-MERGE CHECK                                             #
+      #    Runs only when there are no unresolved threads.                  #
+      # ------------------------------------------------------------------ #
+      - name: Check if ready to merge
+        id: ready_check
+        if: steps.threads.outputs.count == '0'
+        run: |
+          STATUS_INFO=$(gh api \
+            "repos/${{ github.repository }}/commits/$HEAD_SHA/status" \
+            --jq '{state: .state, total: .total_count}')
+
+          STATUS_STATE=$(echo "$STATUS_INFO" | jq -r '.state')
+          STATUS_TOTAL=$(echo "$STATUS_INFO" | jq -r '.total')
+
+          # Exclude this workflow from the check-run count to avoid a
+          # false-negative while the current run is still in progress.
+          BLOCKING_CHECKS=$(gh api \
+            "repos/${{ github.repository }}/commits/$HEAD_SHA/check-runs" \
+            --jq '[.check_runs[]
+              | select(
+                  .name != "Copilot PR Review Loop" and (
+                    .status != "completed" or (
+                      .conclusion != "success" and
+                      .conclusion != "skipped" and
+                      .conclusion != "neutral"
+                    )
+                  )
+                )
+              ] | length')
+
+          # Ready when: legacy status checks all pass (or none exist) AND
+          # there are no blocking GitHub Actions check runs.
+          if [ "$STATUS_TOTAL" = "0" ] || [ "$STATUS_STATE" = "success" ]; then
+            STATUS_OK=true
+          else
+            STATUS_OK=false
+          fi
+
+          if [ "$STATUS_OK" = "true" ] && [ "$BLOCKING_CHECKS" = "0" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Post ready-to-merge comment
+        if: steps.ready_check.outputs.ready == 'true'
+        run: |
+          gh pr comment "$PR_NUMBER" \
+            --repo "${{ github.repository }}" \
+            --body "✅ Ready to merge — all review threads are resolved and all checks have passed."
