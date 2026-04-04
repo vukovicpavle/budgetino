@@ -9,7 +9,12 @@
 # Usage: ./create-labels.sh owner/repo
 # Requires: gh CLI authenticated
 
-REPO="vukovicpavle/budgetino"
+if [ -z "$1" ]; then
+  echo "Usage: ./create-labels.sh owner/repo" >&2
+  exit 1
+fi
+
+REPO="$1"
 
 # Delete default labels (optional)
 # gh label delete "bug" --repo $REPO --yes 2>/dev/null

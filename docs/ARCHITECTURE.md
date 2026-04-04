@@ -181,7 +181,7 @@ api/
 | `subscription` | `list` | query | List active subscriptions |
 | `subscription` | `update` | mutation | Edit a subscription |
 | `subscription` | `cancel` | mutation | Deactivate a subscription |
-| `subscription` | `processdue` | mutation | Auto-create expenses for due subs |
+| `subscription` | `processDue` | mutation | Auto-create expenses for due subs |
 | `analytics` | `spendingByCategory` | query | Pie chart data |
 | `analytics` | `spendingOverTime` | query | Line chart data |
 | `analytics` | `budgetVsActual` | query | Budget utilization |

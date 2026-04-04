@@ -272,8 +272,8 @@ export { BudgetCard, BudgetCardHeader, BudgetCardAmount };
 // Usage:
 // <BudgetCard>
 //   <BudgetCardHeader>
-//     <h3>Groceries</h3>
-//     <Badge>Monthly</Badge>
+//     <h3>{t('budgets.categories.groceries')}</h3>
+//     <Badge>{t('budgets.frequency.monthly')}</Badge>
 //   </BudgetCardHeader>
 //   <BudgetCardAmount amount={500} currency="USD" />
 // </BudgetCard>
