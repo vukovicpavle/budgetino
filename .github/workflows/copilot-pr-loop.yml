@@ -49,9 +49,9 @@ jobs:
       # ------------------------------------------------------------------ #
       - name: Request Copilot review
         if: github.event_name == 'pull_request'
-        # Use the PAT stored in COPILOT_REVIEW_TOKEN when available; the
-        # default GITHUB_TOKEN is tried first but may lack the required
-        # scope for requesting the Copilot reviewer.
+        # Prefer the PAT stored in COPILOT_REVIEW_TOKEN when set, as it has
+        # the required scope for requesting the Copilot reviewer. Falls back
+        # to GITHUB_TOKEN when the secret is not configured.
         # POST to the requested_reviewers endpoint directly so a fresh
         # re-review request is created even when Copilot has already reviewed
         # a previous commit (gh pr edit --add-reviewer is a no-op in that
