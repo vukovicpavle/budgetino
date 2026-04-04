@@ -52,9 +52,17 @@ jobs:
         # Use the PAT stored in COPILOT_REVIEW_TOKEN when available; the
         # default GITHUB_TOKEN is tried first but may lack the required
         # scope for requesting the Copilot reviewer.
+        # POST to the requested_reviewers endpoint directly so a fresh
+        # re-review request is created even when Copilot has already reviewed
+        # a previous commit (gh pr edit --add-reviewer is a no-op in that
+        # case). Falls back to gh pr edit if the REST call fails.
         env:
           GH_TOKEN: ${{ secrets.COPILOT_REVIEW_TOKEN || github.token }}
         run: |
+          echo '{"reviewers":["copilot-pull-request-reviewer"]}' | \
+            gh api --method POST \
+              "repos/${{ github.repository }}/pulls/$PR_NUMBER/requested_reviewers" \
+              --input - || \
           gh pr edit "$PR_NUMBER" \
             --add-reviewer copilot-pull-request-reviewer \
             --repo "${{ github.repository }}" || true
