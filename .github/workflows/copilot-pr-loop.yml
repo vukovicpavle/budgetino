@@ -69,7 +69,7 @@ jobs:
                   pullRequest(number: $pr) {
                     reviewThreads(first: 100) {
                       nodes {
-                        url
+                        id
                         isResolved
                         isOutdated
                       }
@@ -85,7 +85,7 @@ jobs:
           URLS=$(echo "$RESULT" | jq -r '
             [.data.repository.pullRequest.reviewThreads.nodes[]
               | select(.isResolved == false and .isOutdated == false)
-              | .url]
+              | .id]
             | sort | .[]')
 
           if [ -z "$URLS" ]; then
