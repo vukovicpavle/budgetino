@@ -32,6 +32,9 @@ concurrency:
 jobs:
   copilot-review-loop:
     runs-on: ubuntu-latest
+    # Skip the job entirely for fork PRs: the GITHUB_TOKEN is read-only and
+    # secrets are unavailable for forks, so all write operations would fail.
+    if: github.event.pull_request.head.repo.full_name == github.repository
     env:
       GH_TOKEN: ${{ github.token }}
       PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -135,9 +138,9 @@ jobs:
       - name: Fetch stall-tracking comment
         id: stall_fetch
         run: |
-          DATA=$(gh api \
-            "repos/${{ github.repository }}/issues/$PR_NUMBER/comments" \
-            --jq '[.[] | select(.body | startswith("<!-- copilot-pr-loop-stall -->"))] | last')
+          DATA=$(gh api --paginate \
+            "repos/${{ github.repository }}/issues/$PR_NUMBER/comments?per_page=100" \
+            | jq -s 'add | [.[] | select(.body | startswith("<!-- copilot-pr-loop-stall -->"))] | last')
 
           COMMENT_ID=$(echo "$DATA" | jq -r '.id // empty')
           BODY=$(echo "$DATA" | jq -r '.body // ""')
@@ -222,12 +225,16 @@ jobs:
           STATUS_STATE=$(echo "$STATUS_INFO" | jq -r '.state')
           STATUS_TOTAL=$(echo "$STATUS_INFO" | jq -r '.total')
 
-          # Exclude this workflow from the check-run count to avoid a
+          # Exclude this workflow's own check-run from the count to avoid a
           # false-negative while the current run is still in progress.
-          BLOCKING_CHECKS=$(gh api \
-            "repos/${{ github.repository }}/commits/$HEAD_SHA/check-runs" \
-            --jq '[.check_runs[]
+          # GitHub Actions check-runs are named after the job id, so exclude
+          # by ${{ github.job }} and keep the workflow-name exclusion as a
+          # defensive fallback. Fetch all pages to avoid missing checks.
+          BLOCKING_CHECKS=$(gh api --paginate \
+            "repos/${{ github.repository }}/commits/$HEAD_SHA/check-runs?per_page=100" \
+            | jq -s '[.[].check_runs[]
               | select(
+                  .name != "${{ github.job }}" and
                   .name != "Copilot PR Review Loop" and (
                     .status != "completed" or (
                       .conclusion != "success" and
@@ -255,6 +262,22 @@ jobs:
       - name: Post ready-to-merge comment
         if: steps.ready_check.outputs.ready == 'true'
         run: |
-          gh pr comment "$PR_NUMBER" \
-            --repo "${{ github.repository }}" \
-            --body "✅ Ready to merge — all review threads are resolved and all checks have passed."
+          READY_MARKER="<!-- copilot-pr-loop:ready-to-merge -->"
+          READY_BODY="${READY_MARKER}
+          ✅ Ready to merge — all review threads are resolved and all checks have passed."
+
+          # Avoid posting duplicate comments by upserting an existing marker.
+          EXISTING_COMMENT_ID=$(gh api --paginate \
+            "repos/${{ github.repository }}/issues/$PR_NUMBER/comments?per_page=100" \
+            | jq -rs '[.[].[] | select(.user.login == "github-actions[bot]" and (.body | contains("<!-- copilot-pr-loop:ready-to-merge -->")))] | last | .id // empty')
+
+          if [ -n "$EXISTING_COMMENT_ID" ]; then
+            gh api \
+              --method PATCH \
+              "repos/${{ github.repository }}/issues/comments/$EXISTING_COMMENT_ID" \
+              --field body="$READY_BODY"
+          else
+            gh pr comment "$PR_NUMBER" \
+              --repo "${{ github.repository }}" \
+              --body "$READY_BODY"
+          fi
