@@ -112,8 +112,19 @@ jobs:
         if: |
           github.event_name == 'pull_request_review' &&
           steps.threads.outputs.count != '0'
+        # Must use a PAT from a real user account — @copilot mentions posted
+        # by github-actions[bot] are ignored by the Copilot reviewer.
+        # Store the PAT as COPILOT_REVIEW_TOKEN to enable this.
+        env:
+          COPILOT_TOKEN: ${{ secrets.COPILOT_REVIEW_TOKEN }}
         run: |
-          gh pr comment "$PR_NUMBER" \
+          if [ -n "$COPILOT_TOKEN" ]; then
+            COMMENT_TOKEN="$COPILOT_TOKEN"
+          else
+            echo "::warning::COPILOT_REVIEW_TOKEN is not set. The @copilot mention will be posted by github-actions[bot] and may not trigger the Copilot reviewer. Set a PAT with repo scope as COPILOT_REVIEW_TOKEN to fix this."
+            COMMENT_TOKEN="$GH_TOKEN"
+          fi
+          GH_TOKEN="$COMMENT_TOKEN" gh pr comment "$PR_NUMBER" \
             --repo "${{ github.repository }}" \
             --body "@copilot please address each of the suggestions above and push the changes to this branch before merging."
 
