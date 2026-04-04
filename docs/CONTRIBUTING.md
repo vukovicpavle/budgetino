@@ -235,12 +235,13 @@ All components MUST be composable — built from smaller, flexible primitives.
 // ✅ Good — Composable component
 // packages/ui/src/budget-card.tsx
 
+import type { HTMLAttributes, ReactNode } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './card';
 import { Badge } from './badge';
 import { cn } from '@/lib/utils';
 
-interface BudgetCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
+interface BudgetCardProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
 }
 
 function BudgetCard({ className, children, ...props }: BudgetCardProps) {
@@ -251,7 +252,7 @@ function BudgetCard({ className, children, ...props }: BudgetCardProps) {
   );
 }
 
-function BudgetCardHeader({ children, className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+function BudgetCardHeader({ children, className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <CardHeader className={cn(className)} {...props}>
       {children}
@@ -262,7 +263,7 @@ function BudgetCardHeader({ children, className, ...props }: React.HTMLAttribute
 function BudgetCardAmount({ amount, currency }: { amount: number; currency: string }) {
   return (
     <span className="text-2xl font-bold">
-      {formatCurrency(amount, currency)}
+      {new Intl.NumberFormat(undefined, { style: 'currency', currency }).format(amount)}
     </span>
   );
 }
