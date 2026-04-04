@@ -206,7 +206,7 @@ Callback to Supabase → JWT issued
         ▼
 ┌──────────────────┐
 │ Web (Next.js)    │ — Cookie-based session (SSR-compatible)
-│ Mobile (Expo)    │ — Secure storage token (AsyncStorage)
+│ Mobile (Expo)    │ — Secure storage token (expo-secure-store / Keychain+Keystore)
 └──────────────────┘
         │
         ▼

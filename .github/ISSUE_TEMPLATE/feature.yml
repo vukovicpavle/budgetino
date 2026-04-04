@@ -95,7 +95,7 @@ body:
       description: |
         Checklist of quality gates that must pass before the issue can be closed.
       value: |
-        - [ ] Code follows the [Code Style Guide](../docs/CONTRIBUTING.md)
+        - [ ] Code follows the [Code Style Guide](../../docs/CONTRIBUTING.md)
         - [ ] New source files under `apps/` and `packages/` are kebab-case (unless required otherwise by tooling/framework conventions)
         - [ ] Components are composable and reusable
         - [ ] All user-facing strings use translation keys (`t()`) — no hardcoded text
