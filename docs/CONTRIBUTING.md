@@ -537,6 +537,8 @@ An issue receives the `ready` label ONLY when ALL of the following are filled:
 
 ### Getting Started
 
+> **Note:** The Turborepo/pnpm workspace scaffold and related scripts are planned for M0 and are not yet present in the repository. The commands below will work once the scaffold is in place.
+
 ```bash
 # Clone the repo
 git clone https://github.com/vukovicpavle/budgetino.git

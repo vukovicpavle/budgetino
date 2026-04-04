@@ -84,6 +84,8 @@ echo "✅ Labels created successfully!"
 | `in-progress` | 🟣 `#6F42C1` | Currently being worked on |
 | `in-review` | 🔵 `#1D76DB` | PR open, awaiting review |
 | `blocked` | 🔴 `#B60205` | Blocked by dependency |
+| `wontfix` | ⚪ `#FFFFFF` | Will not be addressed |
+| `duplicate` | ⚪ `#CFD3D7` | Duplicate of another issue |
 
 ### Priority Labels
 

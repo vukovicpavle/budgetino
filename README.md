@@ -24,7 +24,7 @@ A cross-platform budget and subscription management app built with Next.js 15 an
 | ORM | Drizzle |
 | Auth | Supabase Auth (GitHub OAuth) |
 | Monorepo | Turborepo + pnpm |
-| i18n | next-intl (web) + i18next (mobile) |
+| i18n | next-intl (web) + i18next + react-i18next (mobile) |
 | Testing | Vitest + Playwright + Maestro |
 | Deployment | Vercel (web) + EAS (mobile) |
 | CI/CD | GitHub Actions |
@@ -68,6 +68,7 @@ budgetino/
 ```bash
 git clone https://github.com/vukovicpavle/budgetino.git
 cd budgetino
+# The commands below require the Turborepo/pnpm workspace scaffold (M0)
 pnpm install
 pnpm dev
 ```
