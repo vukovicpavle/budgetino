@@ -1,1 +1,1 @@
-export type { Config } from "tailwindcss";
+export type { Config } from 'tailwindcss';

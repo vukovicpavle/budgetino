@@ -10,9 +10,10 @@
   "scripts": {
     "lint": "echo \"No lint configured yet\"",
     "type-check": "tsc --noEmit",
-    "clean": "rm -rf dist"
+    "clean": "rimraf dist"
   },
   "devDependencies": {
+    "rimraf": "^5.0.10",
     "typescript": "^5.7.3"
   }
 }
