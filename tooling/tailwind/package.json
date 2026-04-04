@@ -2,5 +2,9 @@
   "name": "@budgetino/tailwind-config",
   "version": "0.0.0",
   "private": true,
+  "main": "index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
   "files": ["index.ts"]
 }
