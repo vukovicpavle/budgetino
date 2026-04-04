@@ -23,6 +23,7 @@
 3. **Small files** — Each file should have a single responsibility. If a file exceeds ~150 lines, consider splitting it.
 4. **DRY but not at the cost of clarity** — Extract shared logic, but don't over-abstract.
 5. **Explicit over implicit** — Name things clearly. Avoid abbreviations.
+6. **i18n from day one** — All user-facing strings must use translation keys via `t()`. Never hardcode text in components. Use `Intl` APIs for date/number/currency formatting.
 
 ### TypeScript
 
@@ -78,6 +79,37 @@ import { formatCurrency } from '@/lib/utils';
 
 import type { Budget } from '@/types';
 ```
+
+### i18n (Internationalization)
+
+All user-facing strings must use translation keys. No hardcoded text in components.
+
+```typescript
+// ✅ Good — translation keys
+import { useTranslations } from 'next-intl'; // web
+// or: import { useTranslation } from 'react-i18next'; // mobile
+
+function BudgetHeader() {
+  const t = useTranslations('budget');
+  return <h1>{t('title')}</h1>;
+}
+
+// ✅ Good — locale-aware formatting
+const amount = new Intl.NumberFormat(locale, {
+  style: 'currency',
+  currency: 'EUR',
+}).format(42.5);
+
+// ❌ Bad — hardcoded strings
+function BudgetHeader() {
+  return <h1>My Budgets</h1>;
+}
+
+// ❌ Bad — manual formatting
+const amount = `€${value.toFixed(2)}`;
+```
+
+Translation files live in `packages/shared/src/i18n/locales/en.json`. MVP is English-only, but the pattern is in place for future languages.
 
 ---
 
@@ -167,7 +199,12 @@ budgetino/
 │       │   ├── types/
 │       │   ├── utils/
 │       │   ├── constants/
-│       │   └── validators/     # Zod schemas (shared between client & server)
+│       │   ├── validators/     # Zod schemas (shared between client & server)
+│       │   └── i18n/           # Shared translation keys & locale files
+│       │       ├── locales/
+│       │       │   └── en.json # English (MVP)
+│       │       ├── keys.ts     # Type-safe key constants
+│       │       └── index.ts
 │       └── package.json
 │
 ├── tooling/                    # Shared tooling configs
@@ -355,6 +392,7 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/) strictly.
 | `shared` | Shared utilities, types |
 | `ci` | GitHub Actions |
 | `deps` | Dependencies |
+| `i18n` | Internationalization, translations |
 
 ### Examples
 

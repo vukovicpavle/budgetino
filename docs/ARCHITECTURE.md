@@ -66,7 +66,10 @@ Budgetino is a cross-platform (web + mobile) budget and subscription management 
 | **Auth** | Supabase Auth | Latest | OAuth (GitHub), session management |
 | **Deployment (Web)** | Vercel | — | Hosting, edge functions |
 | **Deployment (Mobile)** | EAS (Expo) | — | Build & submit to stores |
-| **Monorepo** | Turborepo + pnpm | Latest | Build orchestration |
+| **Monorepo** | Turborepo + pnpm | Latest | Build orchestration, remote caching |
+| **i18n (Web)** | next-intl | Latest | App Router-native, RSC-compatible |
+| **i18n (Mobile)** | i18next + react-i18next | Latest | Mature, widely used for RN |
+| **Locale detection** | expo-localization | Latest | Device locale for Expo |
 | **CI/CD** | GitHub Actions | — | Automated testing, deployment |
 | **Unit Testing** | Vitest | Latest | Fast unit tests |
 | **E2E (Web)** | Playwright | Latest | Browser automation |
@@ -341,3 +344,115 @@ Subscriptions with `is_active = true` are processed for auto-deduction:
 4. **Database indexes** — On `user_id`, `budget_id`, `date`, `next_billing_date`
 5. **Bundle splitting** — Automatic with Next.js App Router
 6. **Mobile performance** — Minimal re-renders, memoized lists with FlashList
+
+---
+
+## Internationalization (i18n) Strategy
+
+### Principles
+
+1. **Architecture now, translations later** — Set up the i18n foundation in M0 so the pattern is established. MVP ships with English only.
+2. **No hardcoded user-facing strings** — Every string visible to users must use a translation key from day one.
+3. **Locale-aware formatting** — Use `Intl.DateTimeFormat`, `Intl.NumberFormat`, and currency formatters consistently. Never concatenate strings with variables for user-visible messages.
+4. **Shared keys, platform-specific rendering** — Translation keys live in `packages/shared/src/i18n/` and are consumed by both Next.js and Expo apps.
+
+### Library Choices
+
+| Platform | Library | Rationale |
+|----------|---------|-----------|
+| **Web (Next.js)** | `next-intl` | Built for App Router, RSC-compatible, lightweight |
+| **Mobile (Expo)** | `i18next` + `react-i18next` + `expo-localization` | Mature ecosystem, works with React Native |
+| **Shared** | JSON locale files in `packages/shared` | Both apps consume the same translation keys |
+
+### File Structure
+
+```
+packages/shared/src/i18n/
+├── locales/
+│   └── en.json           # English (MVP — only locale)
+├── keys.ts               # Type-safe key constants (auto-generated or manual)
+└── index.ts              # Re-exports
+```
+
+### Usage Pattern
+
+```typescript
+// ✅ Always use translation keys
+<Button>{t('expense.add')}</Button>
+<Text>{t('budget.remaining', { amount: formatCurrency(remaining, currency) })}</Text>
+
+// ❌ Never hardcode strings
+<Button>Add Expense</Button>
+<Text>You have $50.00 remaining</Text>
+```
+
+### Formatting Rules
+
+```typescript
+// ✅ Locale-aware formatting
+const formatted = new Intl.NumberFormat(locale, {
+  style: 'currency',
+  currency: currencyCode,
+}).format(amount);
+
+const dateStr = new Intl.DateTimeFormat(locale, {
+  dateStyle: 'medium',
+}).format(date);
+
+// ❌ Manual string formatting
+const formatted = `$${amount.toFixed(2)}`;
+const dateStr = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
+```
+
+### What MVP Includes
+
+- ✅ i18n libraries installed and configured
+- ✅ English locale file (`en.json`) with all translation keys
+- ✅ `t()` function available in all components
+- ✅ `Intl` API for date/number/currency formatting
+- ✅ `locale` field in `user_preferences` table
+
+### What MVP Does NOT Include
+
+- ❌ Additional language translations (post-MVP)
+- ❌ Language switcher UI (post-MVP)
+- ❌ RTL layout support (post-MVP)
+- ❌ Locale-based URL routing (`/en/dashboard`, `/de/dashboard`) (post-MVP)
+
+---
+
+## Turborepo Rationale
+
+### Why Turborepo over alternatives
+
+| Factor | Turborepo | pnpm workspaces alone | Nx |
+|--------|-----------|----------------------|-----|
+| Build orchestration | ✅ Parallel, dependency-aware | ❌ Manual | ✅ Full graph |
+| Caching | ✅ Local + free Vercel remote | ❌ None | ✅ Local + paid cloud |
+| Complexity | Low — single `turbo.json` | Minimal | High — steeper curve |
+| Vercel integration | ✅ Native (same company) | Manual | Plugin needed |
+| Solo dev overhead | Minimal | None | Significant |
+
+### Key Configuration
+
+```jsonc
+// turbo.json
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "pipeline": {
+    "build": { "dependsOn": ["^build"], "outputs": [".next/**", "dist/**"] },
+    "dev": { "cache": false, "persistent": true },
+    "lint": { "dependsOn": ["^build"] },
+    "type-check": { "dependsOn": ["^build"] },
+    "test": { "dependsOn": ["^build"] }
+  }
+}
+```
+
+### Benefits for this project
+
+1. **5+ packages + 2 apps** — running `tsc`, `lint`, `test` across all of them needs orchestration
+2. **Free Vercel remote caching** — CI builds reuse cached results, critical on a 7-day timeline
+3. **Zero config for Vercel deploy** — Turborepo is maintained by Vercel, monorepo detection is automatic
+4. **Incremental adoption** — Start simple, add remote caching and filtering later

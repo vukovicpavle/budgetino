@@ -9,6 +9,7 @@ A cross-platform budget and subscription management app built with Next.js 15 an
 - **Subscription Tracking** — Monitor recurring subscriptions with auto-deduction
 - **Analytics Dashboard** — Spending breakdown by category, trends over time, budget vs. actual
 - **Multi-Currency** — Track expenses in any currency with automatic conversion
+- **i18n-Ready** — All strings use translation keys; English-only for MVP, ready for additional languages
 - **Cross-Platform** — Web (Next.js) + Mobile (Expo) with shared codebase
 
 ## Tech Stack
@@ -23,6 +24,7 @@ A cross-platform budget and subscription management app built with Next.js 15 an
 | ORM | Drizzle |
 | Auth | Supabase Auth (GitHub OAuth) |
 | Monorepo | Turborepo + pnpm |
+| i18n | next-intl (web) + i18next (mobile) |
 | Testing | Vitest + Playwright + Maestro |
 | Deployment | Vercel (web) + EAS (mobile) |
 | CI/CD | GitHub Actions |

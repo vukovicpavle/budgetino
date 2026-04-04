@@ -133,6 +133,7 @@ body:
         - [ ] Root cause identified and documented in the PR
         - [ ] Fix implemented following [Code Style Guide](../docs/CONTRIBUTING.md)
         - [ ] Regression test added (Vitest or Playwright/Maestro)
+        - [ ] All user-facing strings use translation keys (`t()`)
         - [ ] No TypeScript errors
         - [ ] CI/CD passes
         - [ ] Tested on affected platform(s)

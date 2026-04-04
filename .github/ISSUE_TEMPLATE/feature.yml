@@ -40,6 +40,9 @@ body:
         ### UI
         - New screen: `SubscriptionListScreen`
         - Reuse `CategoryPicker` component
+
+        ### i18n
+        - New translation keys: `subscription.title`, `subscription.add`, ...
     validations:
       required: true
 
@@ -95,6 +98,7 @@ body:
         - [ ] Code follows the [Code Style Guide](../docs/CONTRIBUTING.md)
         - [ ] All files are kebab-case
         - [ ] Components are composable and reusable
+        - [ ] All user-facing strings use translation keys (`t()`) — no hardcoded text
         - [ ] Unit tests written and passing (Vitest)
         - [ ] E2E tests written and passing (Playwright for web, Maestro for mobile)
         - [ ] No TypeScript errors (`tsc --noEmit`)
@@ -103,6 +107,7 @@ body:
         - [ ] CI/CD pipeline passes
         - [ ] Reviewed and approved
         - [ ] Documentation updated (if applicable)
+        - [ ] i18n: all new strings added to `en.json` locale file
     validations:
       required: true
 
