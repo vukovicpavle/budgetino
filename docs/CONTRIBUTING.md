@@ -526,16 +526,29 @@ An issue receives the `ready` label ONLY when ALL of the following are filled:
    - **Android:** Launch an Android emulator via Android Studio or `emulator -avd <name>`
    - **iOS (macOS only):** Launch an iOS simulator via Xcode or `open -a Simulator`
 
-3. **Build and run the app on the emulator/simulator:**
+3. **Install a native development build on the emulator/simulator:**
+
+   ```bash
+   # From the repo root
+   # Android
+   pnpm --filter mobile android
+
+   # iOS (macOS only)
+   pnpm --filter mobile ios
+   ```
+
+   If you prefer Expo commands directly, you can use `expo run:android` or `expo run:ios` from `apps/mobile`.
+
+4. **Start the Metro bundler for the installed app:**
 
    ```bash
    # From the repo root
    pnpm dev:mobile
    ```
 
-   Then press `a` for Android or `i` for iOS in the Expo CLI to load the app.
+   This starts `expo start`. Use it only after the native app binary is installed, so Maestro can launch the app by its app id (`com.budgetino.app`).
 
-4. **Run Maestro flows:**
+5. **Run Maestro flows against the installed app:**
 
    ```bash
    # Run all flows
