@@ -123,10 +123,10 @@ pnpm --filter mobile eas-build:preview
 pnpm --filter mobile eas-build:production
 ```
 
-**Secrets:** Set secrets via the EAS dashboard or CLI — do not commit secrets to source code:
+**Secrets:** Set secrets via the EAS dashboard or CLI — do not commit secrets to source code. When using the CLI, omit `--value` so EAS prompts for the secret instead of storing it in shell history:
 
 ```bash
-pnpm exec eas secret:create --name API_URL --value "https://api.example.com"
+pnpm exec eas secret:create --name API_URL
 ```
 
 See [EAS secrets](https://docs.expo.dev/build-reference/variables/#using-secrets-in-environment-variables) for more details.

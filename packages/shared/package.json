@@ -13,6 +13,7 @@
     "clean": "rimraf dist"
   },
   "devDependencies": {
+    "@budgetino/typescript-config": "workspace:*",
     "rimraf": "^5.0.10",
     "typescript": "^5.7.3"
   }
