@@ -117,19 +117,19 @@ Translation files live in `packages/shared/src/i18n/locales/en.json`. MVP is Eng
 
 ### Naming
 
-| Item | Convention | Example |
-|------|-----------|---------|
-| Files | `kebab-case` | `budget-list.tsx`, `use-budget.ts` |
-| Directories | `kebab-case` | `budget-management/`, `ui/` |
-| Components | `PascalCase` (export) | `export function BudgetList()` |
-| Hooks | `camelCase` with `use` prefix | `export function useBudget()` |
-| Utils/Helpers | `camelCase` | `export function formatCurrency()` |
-| Types/Interfaces | `PascalCase` | `interface BudgetCategory {}` |
-| Constants | `SCREAMING_SNAKE_CASE` | `const MAX_CATEGORIES = 50;` |
-| DB tables | `snake_case` | `budget_categories` |
-| DB columns | `snake_case` | `created_at` |
-| API routes | `kebab-case` | `/api/budget-categories` |
-| Environment variables | `SCREAMING_SNAKE_CASE` | `NEXT_PUBLIC_SUPABASE_URL` |
+| Item                  | Convention                    | Example                            |
+| --------------------- | ----------------------------- | ---------------------------------- |
+| Files                 | `kebab-case`                  | `budget-list.tsx`, `use-budget.ts` |
+| Directories           | `kebab-case`                  | `budget-management/`, `ui/`        |
+| Components            | `PascalCase` (export)         | `export function BudgetList()`     |
+| Hooks                 | `camelCase` with `use` prefix | `export function useBudget()`      |
+| Utils/Helpers         | `camelCase`                   | `export function formatCurrency()` |
+| Types/Interfaces      | `PascalCase`                  | `interface BudgetCategory {}`      |
+| Constants             | `SCREAMING_SNAKE_CASE`        | `const MAX_CATEGORIES = 50;`       |
+| DB tables             | `snake_case`                  | `budget_categories`                |
+| DB columns            | `snake_case`                  | `created_at`                       |
+| API routes            | `kebab-case`                  | `/api/budget-categories`           |
+| Environment variables | `SCREAMING_SNAKE_CASE`        | `NEXT_PUBLIC_SUPABASE_URL`         |
 
 ### File Structure Rules
 
@@ -313,7 +313,9 @@ function BudgetCard({
 // packages/shared/src/hooks/use-budget.ts
 
 export function useBudget(budgetId: string) {
-  const { data, isLoading, error } = api.budget.getById.useQuery({ id: budgetId });
+  const { data, isLoading, error } = api.budget.getById.useQuery({
+    id: budgetId,
+  });
 
   const remaining = useMemo(() => {
     if (!data) return 0;
@@ -367,33 +369,33 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/) strictly.
 
 ### Types
 
-| Type | Description |
-|------|-------------|
-| `feat` | New feature |
-| `fix` | Bug fix |
+| Type       | Description                                             |
+| ---------- | ------------------------------------------------------- |
+| `feat`     | New feature                                             |
+| `fix`      | Bug fix                                                 |
 | `refactor` | Code change that neither fixes a bug nor adds a feature |
-| `style` | Formatting, white-space, etc. (not CSS) |
-| `docs` | Documentation only |
-| `test` | Adding or correcting tests |
-| `chore` | Build process, CI, tooling, dependencies |
-| `perf` | Performance improvement |
-| `ci` | CI/CD changes |
-| `revert` | Reverts a previous commit |
+| `style`    | Formatting, white-space, etc. (not CSS)                 |
+| `docs`     | Documentation only                                      |
+| `test`     | Adding or correcting tests                              |
+| `chore`    | Build process, CI, tooling, dependencies                |
+| `perf`     | Performance improvement                                 |
+| `ci`       | CI/CD changes                                           |
+| `revert`   | Reverts a previous commit                               |
 
 ### Scopes
 
-| Scope | Description |
-|-------|-------------|
-| `web` | Next.js app |
-| `mobile` | Expo app |
-| `ui` | Shared UI package |
-| `api` | tRPC / API |
-| `db` | Database schema, migrations |
-| `auth` | Authentication |
-| `shared` | Shared utilities, types |
-| `ci` | GitHub Actions |
-| `deps` | Dependencies |
-| `i18n` | Internationalization, translations |
+| Scope    | Description                        |
+| -------- | ---------------------------------- |
+| `web`    | Next.js app                        |
+| `mobile` | Expo app                           |
+| `ui`     | Shared UI package                  |
+| `api`    | tRPC / API                         |
+| `db`     | Database schema, migrations        |
+| `auth`   | Authentication                     |
+| `shared` | Shared utilities, types            |
+| `ci`     | GitHub Actions                     |
+| `deps`   | Dependencies                       |
+| `i18n`   | Internationalization, translations |
 
 ### Examples
 
@@ -447,29 +449,29 @@ Created → Triaged → Ready → In Progress → In Review → Done
 
 ### Labels
 
-| Label | Color | Description |
-|-------|-------|-------------|
-| `feature` | `#0E8A16` | New feature request |
-| `bug` | `#D73A4A` | Bug report |
-| `needs-triage` | `#FBCA04` | Needs review and prioritization |
-| `ready` | `#0075CA` | All sections filled, ready for development |
-| `in-progress` | `#6F42C1` | Currently being worked on |
-| `in-review` | `#1D76DB` | PR open, awaiting review |
-| `blocked` | `#B60205` | Blocked by another issue or external factor |
-| `p0-critical` | `#B60205` | Blocks other work |
-| `p1-high` | `#D93F0B` | Core MVP feature |
-| `p2-medium` | `#FBCA04` | Important but not blocking |
-| `p3-low` | `#0E8A16` | Nice to have |
-| `m0-setup` | `#C2E0C6` | Milestone 0: Project Setup |
-| `m1-budget` | `#C2E0C6` | Milestone 1: Budget Management |
-| `m2-subscriptions` | `#C2E0C6` | Milestone 2: Subscription Tracking |
-| `m3-analytics` | `#C2E0C6` | Milestone 3: Dashboard & Analytics |
-| `m4-polish` | `#C2E0C6` | Milestone 4: Notifications & Polish |
-| `m5-launch` | `#C2E0C6` | Milestone 5: Launch Prep |
-| `web` | `#BFD4F2` | Affects web (Next.js) |
-| `mobile` | `#BFD4F2` | Affects mobile (Expo) |
-| `api` | `#BFD4F2` | Affects API / backend |
-| `db` | `#BFD4F2` | Affects database |
+| Label              | Color     | Description                                 |
+| ------------------ | --------- | ------------------------------------------- |
+| `feature`          | `#0E8A16` | New feature request                         |
+| `bug`              | `#D73A4A` | Bug report                                  |
+| `needs-triage`     | `#FBCA04` | Needs review and prioritization             |
+| `ready`            | `#0075CA` | All sections filled, ready for development  |
+| `in-progress`      | `#6F42C1` | Currently being worked on                   |
+| `in-review`        | `#1D76DB` | PR open, awaiting review                    |
+| `blocked`          | `#B60205` | Blocked by another issue or external factor |
+| `p0-critical`      | `#B60205` | Blocks other work                           |
+| `p1-high`          | `#D93F0B` | Core MVP feature                            |
+| `p2-medium`        | `#FBCA04` | Important but not blocking                  |
+| `p3-low`           | `#0E8A16` | Nice to have                                |
+| `m0-setup`         | `#C2E0C6` | Milestone 0: Project Setup                  |
+| `m1-budget`        | `#C2E0C6` | Milestone 1: Budget Management              |
+| `m2-subscriptions` | `#C2E0C6` | Milestone 2: Subscription Tracking          |
+| `m3-analytics`     | `#C2E0C6` | Milestone 3: Dashboard & Analytics          |
+| `m4-polish`        | `#C2E0C6` | Milestone 4: Notifications & Polish         |
+| `m5-launch`        | `#C2E0C6` | Milestone 5: Launch Prep                    |
+| `web`              | `#BFD4F2` | Affects web (Next.js)                       |
+| `mobile`           | `#BFD4F2` | Affects mobile (Expo)                       |
+| `api`              | `#BFD4F2` | Affects API / backend                       |
+| `db`               | `#BFD4F2` | Affects database                            |
 
 ### Ready Criteria
 

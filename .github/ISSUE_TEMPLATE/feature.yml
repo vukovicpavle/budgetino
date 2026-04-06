@@ -1,7 +1,7 @@
-name: "✨ Feature Request"
-description: "Propose a new feature for Budgetino"
-title: "feat: "
-labels: ["feature", "needs-triage"]
+name: '✨ Feature Request'
+description: 'Propose a new feature for Budgetino'
+title: 'feat: '
+labels: ['feature', 'needs-triage']
 body:
   - type: markdown
     attributes:
@@ -15,7 +15,7 @@ body:
     attributes:
       label: Summary
       description: "A clear, concise description of what this feature does and why it's needed."
-      placeholder: "As a user, I want to... so that..."
+      placeholder: 'As a user, I want to... so that...'
     validations:
       required: true
 
@@ -115,7 +115,7 @@ body:
     id: out-of-scope
     attributes:
       label: Out of Scope
-      description: "Explicitly list what is NOT part of this issue to prevent scope creep."
+      description: 'Explicitly list what is NOT part of this issue to prevent scope creep.'
       placeholder: "- Bank API integration\n- CSV export\n- Shared budgets"
     validations:
       required: false
@@ -124,14 +124,14 @@ body:
     id: milestone
     attributes:
       label: Target Milestone
-      description: "Which milestone does this belong to?"
+      description: 'Which milestone does this belong to?'
       options:
-        - "M0: Project Setup"
-        - "M1: Budget Management"
-        - "M2: Subscription Tracking"
-        - "M3: Dashboard & Analytics"
-        - "M4: Notifications & Polish"
-        - "M5: Launch Prep"
+        - 'M0: Project Setup'
+        - 'M1: Budget Management'
+        - 'M2: Subscription Tracking'
+        - 'M3: Dashboard & Analytics'
+        - 'M4: Notifications & Polish'
+        - 'M5: Launch Prep'
     validations:
       required: true
 
@@ -140,10 +140,10 @@ body:
     attributes:
       label: Priority
       options:
-        - "P0 - Critical (blocks other work)"
-        - "P1 - High (core MVP feature)"
-        - "P2 - Medium (important but not blocking)"
-        - "P3 - Low (nice to have)"
+        - 'P0 - Critical (blocks other work)'
+        - 'P1 - High (core MVP feature)'
+        - 'P2 - Medium (important but not blocking)'
+        - 'P3 - Low (nice to have)'
     validations:
       required: true
 
@@ -151,7 +151,7 @@ body:
     id: dependencies
     attributes:
       label: Dependencies
-      description: "List any issues that must be completed before this one can start."
+      description: 'List any issues that must be completed before this one can start.'
       placeholder: "- #12 Database schema setup\n- #15 Auth implementation"
     validations:
       required: false

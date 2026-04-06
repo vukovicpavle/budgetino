@@ -1,7 +1,7 @@
-name: "🐛 Bug Report"
-description: "Report a bug in Budgetino"
-title: "fix: "
-labels: ["bug", "needs-triage"]
+name: '🐛 Bug Report'
+description: 'Report a bug in Budgetino'
+title: 'fix: '
+labels: ['bug', 'needs-triage']
 body:
   - type: markdown
     attributes:
@@ -13,7 +13,7 @@ body:
     id: description
     attributes:
       label: Bug Description
-      description: "A clear and concise description of the bug."
+      description: 'A clear and concise description of the bug.'
       placeholder: "When I try to add a new expense, the form submits but the expense doesn't appear in the list."
     validations:
       required: true
@@ -22,7 +22,7 @@ body:
     id: steps-to-reproduce
     attributes:
       label: Steps to Reproduce
-      description: "Step-by-step instructions to reproduce the bug."
+      description: 'Step-by-step instructions to reproduce the bug.'
       placeholder: |
         1. Navigate to Budget > Expenses
         2. Click "Add Expense"
@@ -36,8 +36,8 @@ body:
     id: expected-behavior
     attributes:
       label: Expected Behavior
-      description: "What should have happened?"
-      placeholder: "The expense should appear in the expense list with the correct amount and category."
+      description: 'What should have happened?'
+      placeholder: 'The expense should appear in the expense list with the correct amount and category.'
     validations:
       required: true
 
@@ -45,7 +45,7 @@ body:
     id: actual-behavior
     attributes:
       label: Actual Behavior
-      description: "What actually happened? Include error messages, screenshots, or logs."
+      description: 'What actually happened? Include error messages, screenshots, or logs.'
       placeholder: "The form closes but the expense list remains empty. Console shows: 'TypeError: Cannot read property id of undefined'"
     validations:
       required: true
@@ -54,12 +54,12 @@ body:
     id: platform
     attributes:
       label: Platform
-      description: "Where does this bug occur?"
+      description: 'Where does this bug occur?'
       multiple: true
       options:
-        - "Web (Next.js)"
-        - "iOS (Expo)"
-        - "Android (Expo)"
+        - 'Web (Next.js)'
+        - 'iOS (Expo)'
+        - 'Android (Expo)'
     validations:
       required: true
 
@@ -67,8 +67,8 @@ body:
     id: version
     attributes:
       label: App Version / Commit SHA
-      description: "Which version or commit are you running?"
-      placeholder: "v0.1.0 or abc1234"
+      description: 'Which version or commit are you running?'
+      placeholder: 'v0.1.0 or abc1234'
     validations:
       required: false
 
@@ -76,7 +76,7 @@ body:
     id: environment
     attributes:
       label: Environment
-      description: "Browser, OS, device details."
+      description: 'Browser, OS, device details.'
       placeholder: |
         - Browser: Chrome 120
         - OS: macOS 14.2
@@ -89,10 +89,10 @@ body:
     attributes:
       label: Severity
       options:
-        - "Critical (app crash, data loss)"
-        - "High (feature broken, no workaround)"
-        - "Medium (feature broken, workaround exists)"
-        - "Low (cosmetic, minor inconvenience)"
+        - 'Critical (app crash, data loss)'
+        - 'High (feature broken, no workaround)'
+        - 'Medium (feature broken, workaround exists)'
+        - 'Low (cosmetic, minor inconvenience)'
     validations:
       required: true
 
@@ -100,7 +100,7 @@ body:
     id: possible-fix
     attributes:
       label: Possible Fix
-      description: "If you have an idea of what might be causing this, share it here."
+      description: 'If you have an idea of what might be causing this, share it here.'
       placeholder: "The issue might be in `use-expenses.ts` where the mutation doesn't invalidate the query cache."
     validations:
       required: false
@@ -109,7 +109,7 @@ body:
     id: screenshots
     attributes:
       label: Screenshots / Recordings
-      description: "Attach screenshots, screen recordings, or console logs."
+      description: 'Attach screenshots, screen recordings, or console logs.'
     validations:
       required: false
 
@@ -117,7 +117,7 @@ body:
     id: acceptance-criteria
     attributes:
       label: Acceptance Criteria
-      description: "What must be true for this bug to be considered fixed?"
+      description: 'What must be true for this bug to be considered fixed?'
       placeholder: |
         - [ ] Expense appears in the list after form submission
         - [ ] No console errors during the flow

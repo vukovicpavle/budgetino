@@ -14,20 +14,20 @@ A cross-platform budget and subscription management app built with Next.js 15 an
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Web | Next.js 15 (App Router) |
-| Mobile | Expo 55 (Expo Router) |
-| UI | shadcn/ui + Tailwind CSS + NativeWind |
-| API | tRPC v11 |
-| Database | PostgreSQL (Supabase) |
-| ORM | Drizzle |
-| Auth | Supabase Auth (GitHub OAuth) |
-| Monorepo | Turborepo + pnpm |
-| i18n | next-intl (web) + i18next + react-i18next (mobile) |
-| Testing | Vitest + Playwright + Maestro |
-| Deployment | Vercel (web) + EAS (mobile) |
-| CI/CD | GitHub Actions |
+| Layer      | Technology                                         |
+| ---------- | -------------------------------------------------- |
+| Web        | Next.js 15 (App Router)                            |
+| Mobile     | Expo 55 (Expo Router)                              |
+| UI         | shadcn/ui + Tailwind CSS + NativeWind              |
+| API        | tRPC v11                                           |
+| Database   | PostgreSQL (Supabase)                              |
+| ORM        | Drizzle                                            |
+| Auth       | Supabase Auth (GitHub OAuth)                       |
+| Monorepo   | Turborepo + pnpm                                   |
+| i18n       | next-intl (web) + i18next + react-i18next (mobile) |
+| Testing    | Vitest + Playwright + Maestro                      |
+| Deployment | Vercel (web) + EAS (mobile)                        |
+| CI/CD      | GitHub Actions                                     |
 
 ## Project Structure
 
@@ -124,12 +124,12 @@ pnpm db:status
 
 After running `pnpm db:start`, the following local services are available:
 
-| Service | URL |
-|---------|-----|
-| API / REST | `http://127.0.0.1:54321` |
-| Studio (UI) | `http://127.0.0.1:54323` |
-| Database | `postgresql://postgres:postgres@127.0.0.1:54322/postgres` |
-| Inbucket (email) | `http://127.0.0.1:54324` |
+| Service          | URL                                                       |
+| ---------------- | --------------------------------------------------------- |
+| API / REST       | `http://127.0.0.1:54321`                                  |
+| Studio (UI)      | `http://127.0.0.1:54323`                                  |
+| Database         | `postgresql://postgres:postgres@127.0.0.1:54322/postgres` |
+| Inbucket (email) | `http://127.0.0.1:54324`                                  |
 
 #### Environment Setup
 
@@ -141,31 +141,32 @@ cp .env.example .env.local
 
 For **local development**, the values from `pnpm db:status` can be used directly. For **cloud/production**, retrieve the keys from the Supabase Dashboard → Project Settings → API.
 
-| Variable | Description |
-|----------|-------------|
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL (safe for browser) |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anonymous/public API key (safe for browser) |
-| `SUPABASE_SERVICE_ROLE_KEY` | Service role key — **server-side only, never expose** |
-| `DATABASE_URL` | PostgreSQL connection string (used by Drizzle/migrations) |
+| Variable                        | Description                                               |
+| ------------------------------- | --------------------------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`      | Supabase project URL (safe for browser)                   |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anonymous/public API key (safe for browser)               |
+| `SUPABASE_SERVICE_ROLE_KEY`     | Service role key — **server-side only, never expose**     |
+| `DATABASE_URL`                  | PostgreSQL connection string (used by Drizzle/migrations) |
 
 > **Security:** Never commit `.env.local` or any file containing real API keys. `.env.local` is gitignored by default.
 
 ## Milestones
 
-| # | Milestone | Timeline |
-|---|-----------|----------|
-| M0 | 🏗️ Project Setup | Day 1 |
-| M1 | 💰 Budget Management | Day 2–3 |
-| M2 | 🔄 Subscription Tracking | Day 3–4 |
-| M3 | 📊 Dashboard & Analytics | Day 5 |
-| M4 | 🔔 Notifications & Polish | Day 6 |
-| M5 | 🚀 Launch Prep | Day 7 |
+| #   | Milestone                 | Timeline |
+| --- | ------------------------- | -------- |
+| M0  | 🏗️ Project Setup          | Day 1    |
+| M1  | 💰 Budget Management      | Day 2–3  |
+| M2  | 🔄 Subscription Tracking  | Day 3–4  |
+| M3  | 📊 Dashboard & Analytics  | Day 5    |
+| M4  | 🔔 Notifications & Polish | Day 6    |
+| M5  | 🚀 Launch Prep            | Day 7    |
 
 ## Contributing
 
 Please read the [Contributing Guide](docs/CONTRIBUTING.md) before making any changes.
 
 **Key rules:**
+
 - New app/package source files should use `kebab-case` where applicable; standard repo/documentation filenames such as `README.md` and GitHub template files are allowed exceptions
 - All components must be composable (shadcn-style)
 - Commits and PR titles must follow [Conventional Commits](https://www.conventionalcommits.org/)
