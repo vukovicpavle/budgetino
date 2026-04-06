@@ -4,5 +4,9 @@ export {
   createServerClient,
 } from './client';
 export { updateSession } from './middleware';
-export type { AuthContextValue, AuthProviderProps } from './provider';
+export type {
+  AuthContextValue,
+  AuthProviderProps,
+  SignInWithGitHubOptions,
+} from './provider';
 export { AuthProvider, useAuth } from './provider';

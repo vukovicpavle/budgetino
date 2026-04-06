@@ -45,10 +45,11 @@ export async function updateSession(
 
   const { pathname } = request.nextUrl;
 
-  // Redirect unauthenticated users to the login page (except for login itself
-  // and public assets/routes).
+  // Redirect unauthenticated users to the login page (except for login itself,
+  // the auth callback, and public assets/routes).
   const isAuthRoute =
     pathname.startsWith('/login') ||
+    pathname.startsWith('/auth/') ||
     pathname.startsWith('/_next') ||
     pathname.startsWith('/favicon');
 
