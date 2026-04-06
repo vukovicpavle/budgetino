@@ -57,9 +57,6 @@ importers:
       '@budgetino/typescript-config':
         specifier: workspace:*
         version: link:../../tooling/typescript
-      '@types/react':
-        specifier: ^19
-        version: 19.2.14
       rimraf:
         specifier: ^5.0.10
         version: 5.0.10
