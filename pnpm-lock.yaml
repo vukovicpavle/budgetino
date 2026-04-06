@@ -69,9 +69,6 @@ importers:
       '@budgetino/typescript-config':
         specifier: workspace:*
         version: link:../../tooling/typescript
-      '@types/react':
-        specifier: ^19
-        version: 19.2.14
       eas-cli:
         specifier: 18.4.0
         version: 18.4.0(@types/node@20.19.39)(typescript@5.9.3)
