@@ -89,8 +89,11 @@ pnpm build
 # Type-check all packages
 pnpm type-check
 
-# Run all tests (not yet wired up — test scripts will be added per package in subsequent milestones)
+# Run root test script (placeholder — per-package test scripts will be added in subsequent milestones)
 pnpm test
+
+# Run Playwright E2E tests for the web app
+pnpm --filter web e2e
 
 # Lint all packages
 pnpm lint
