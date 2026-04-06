@@ -14,8 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noUncheckedIndexedAccess": true,
-    "forceConsistentCasingInFileNames": true,
-    "incremental": true
+    "forceConsistentCasingInFileNames": true
   },
   "exclude": ["node_modules"]
 }
