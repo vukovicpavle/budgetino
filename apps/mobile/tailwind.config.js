@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 const sharedConfig = require('@budgetino/tailwind-config');
 
 /** @type {import('tailwindcss').Config} */
