@@ -15,11 +15,11 @@ export type Messages = typeof en;
 /**
  * Recursively builds dot-notation key paths from a nested object type.
  *
- * Example: { common: { save: string } } → 'common' | 'common.save'
+ * Example: { common: { save: string } } → 'common.save'
  */
 type NestedKeyOf<T extends Record<string, unknown>> = {
   [K in keyof T & string]: T[K] extends Record<string, unknown>
-    ? K | `${K}.${NestedKeyOf<T[K]>}`
+    ? `${K}.${NestedKeyOf<T[K]>}`
     : K;
 }[keyof T & string];
 

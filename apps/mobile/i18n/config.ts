@@ -15,6 +15,8 @@ i18n.use(initReactI18next).init({
   fallbackLng: defaultLocale,
   interpolation: {
     escapeValue: false,
+    prefix: '{',
+    suffix: '}',
   },
 });
 
