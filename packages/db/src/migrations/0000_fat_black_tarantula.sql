@@ -20,3 +20,18 @@ CREATE TABLE "users" (
 );
 --> statement-breakpoint
 ALTER TABLE "user_preferences" ADD CONSTRAINT "user_preferences_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
+--> statement-breakpoint
+CREATE OR REPLACE FUNCTION "public"."set_updated_at"()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+	NEW."updated_at" = now();
+	RETURN NEW;
+END;
+$$;
+--> statement-breakpoint
+CREATE TRIGGER "users_set_updated_at"
+BEFORE UPDATE ON "users"
+FOR EACH ROW
+EXECUTE FUNCTION "public"."set_updated_at"();
