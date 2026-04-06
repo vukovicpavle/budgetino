@@ -6,7 +6,7 @@ test.describe('Landing page', () => {
 
     await expect(page.locator('h1')).toHaveText('Budgetino');
     await expect(
-      page.getByText('Budget and subscription management app'),
+      page.getByText('Budget and subscription management app')
     ).toBeVisible();
   });
 
