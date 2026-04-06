@@ -3,7 +3,9 @@ import postgres from 'postgres';
 
 import * as schema from './schema';
 
-let _db: ReturnType<typeof drizzle<typeof schema>> | undefined;
+import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
+
+let _db: PostgresJsDatabase<typeof schema> | undefined;
 let _client: ReturnType<typeof postgres> | undefined;
 
 export function getDb() {
