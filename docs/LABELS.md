@@ -31,7 +31,6 @@ echo "✅ Labels created successfully!"
 
 ### Workflow Labels
 
-| Label | Color | Description |
-|-------|-------|-------------|
+| Label   | Color        | Description                        |
+| ------- | ------------ | ---------------------------------- |
 | `ready` | 🔵 `#0075CA` | All sections filled, ready for dev |
-
