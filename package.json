@@ -11,7 +11,11 @@
     "type-check": "turbo type-check",
     "test": "node -e \"process.exit(0)\"",
     "format:check": "turbo format:check",
-    "clean": "turbo clean"
+    "clean": "turbo clean",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:status": "supabase status"
   },
   "devDependencies": {
     "turbo": "^2.9.3",
