@@ -505,6 +505,54 @@ An issue receives the `ready` label ONLY when ALL of the following are filled:
 
 - Core user flows on mobile must have Maestro tests
 - Test file naming: `<flow-name>.yaml`
+- Flow files live in `apps/mobile/.maestro/`
+
+#### Local Setup
+
+1. **Install Maestro CLI** (macOS/Linux):
+
+   ```bash
+   curl -Ls 'https://get.maestro.mobile.dev' | bash
+   ```
+
+   Verify the installation:
+
+   ```bash
+   maestro --version
+   ```
+
+2. **Start an emulator/simulator:**
+
+   - **Android:** Launch an Android emulator via Android Studio or `emulator -avd <name>`
+   - **iOS (macOS only):** Launch an iOS simulator via Xcode or `open -a Simulator`
+
+3. **Build and run the app on the emulator/simulator:**
+
+   ```bash
+   # From the repo root
+   pnpm dev:mobile
+   ```
+
+   Then press `a` for Android or `i` for iOS in the Expo CLI to load the app.
+
+4. **Run Maestro flows:**
+
+   ```bash
+   # Run all flows
+   maestro test apps/mobile/.maestro/
+
+   # Run a single flow
+   maestro test apps/mobile/.maestro/app-launches.yaml
+   ```
+
+#### CI Integration Plan
+
+Maestro tests will be integrated into CI in a future milestone. The planned approach:
+
+- **Option A — Maestro Cloud:** Use [Maestro Cloud](https://cloud.mobile.dev) with EAS Build to upload builds and run flows in the cloud. This avoids managing emulators in CI.
+- **Option B — Local emulator in CI:** Use a GitHub Actions workflow with an Android emulator (`reactivecircus/android-emulator-runner`) to run Maestro flows on each PR.
+
+The chosen approach will depend on cost and complexity trade-offs at the time of implementation.
 
 ---
 

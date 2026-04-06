@@ -1,0 +1,5 @@
+appId: com.budgetino.app
+---
+- launchApp
+- assertVisible: 'Budgetino'
+- assertVisible: 'Budget and subscription management'
