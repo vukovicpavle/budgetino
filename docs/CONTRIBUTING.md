@@ -536,6 +536,74 @@ pnpm --filter web exec playwright test
 
 - Core user flows on mobile must have Maestro tests
 - Test file naming: `<flow-name>.yaml`
+- Flow files live in `apps/mobile/.maestro/`
+
+#### Local Setup
+
+1. **Install Maestro CLI** (macOS/Linux):
+
+   Prefer the official installation instructions from Maestro:
+   <https://maestro.mobile.dev/getting-started/installing-maestro>
+
+   If you use the installer script, download it first, inspect it, and then run it:
+
+   ```bash
+   curl -Ls 'https://get.maestro.mobile.dev' -o install-maestro.sh
+   # Review the script before executing it
+   bash install-maestro.sh
+   ```
+
+   Verify the installation:
+
+   ```bash
+   maestro --version
+   ```
+
+2. **Start an emulator/simulator:**
+
+   - **Android:** Launch an Android emulator via Android Studio or `emulator -avd <name>`
+   - **iOS (macOS only):** Launch an iOS simulator via Xcode or `open -a Simulator`
+
+3. **Install a native development build on the emulator/simulator:**
+
+   ```bash
+   # From the repo root
+   # Android
+   pnpm --filter mobile android
+
+   # iOS (macOS only)
+   pnpm --filter mobile ios
+   ```
+
+   If you prefer Expo commands directly, you can use `expo run:android` or `expo run:ios` from `apps/mobile`.
+
+4. **Start the Metro bundler for the installed app:**
+
+   ```bash
+   # From the repo root
+   pnpm dev:mobile
+   ```
+
+   This starts `expo start`. Run it after the native app binary is installed. Maestro can launch the installed app by its app id (`com.budgetino.app`) as long as that native build is present; Metro is needed so the Expo development build can load the JavaScript bundle and render the UI (otherwise it may open to a red screen or a "bundler not running" message).
+
+5. **Run Maestro flows against the installed app:**
+
+   ```bash
+   # Run all flows
+   maestro test apps/mobile/.maestro/
+
+   # Run a single flow
+   maestro test apps/mobile/.maestro/app-launches.yaml
+   ```
+
+#### CI Integration Plan
+
+Maestro tests will be integrated into CI in a future milestone. The planned approach:
+
+- **Option A — Maestro Cloud:** Use [Maestro Cloud](https://cloud.mobile.dev) with EAS Build to upload builds and run flows in the cloud. This avoids managing emulators in CI.
+- **Option B — Local emulator in CI:** Use a GitHub Actions workflow with an Android emulator (`reactivecircus/android-emulator-runner`) to run Maestro flows on each PR.
+
+The chosen approach will depend on cost and complexity trade-offs at the time of implementation.
 
 ---
 
