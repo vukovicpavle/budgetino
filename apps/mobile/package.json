@@ -33,6 +33,7 @@
     "@budgetino/eslint-config": "workspace:*",
     "@budgetino/tailwind-config": "workspace:*",
     "@budgetino/typescript-config": "workspace:*",
+    "@types/react": "~18.3.0",
     "eas-cli": "18.4.0",
     "eslint": "^9",
     "rimraf": "^5.0.10",
