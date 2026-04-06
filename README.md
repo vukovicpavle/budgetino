@@ -96,9 +96,11 @@ pnpm lint
 
 ### EAS Build (Mobile)
 
-> **Prerequisites:** `eas-cli` (`>= 14.0.0`) is included as a devDependency. Run `pnpm install` from the repo root to set it up.
+> **Prerequisites:** `eas-cli` (`18.4.0`) is included as a devDependency. Run `pnpm install` from the repo root to set it up.
 
 ```bash
+cd apps/mobile
+
 # Build for development (dev client with simulator support)
 pnpm exec eas build --profile development
 
@@ -113,7 +115,7 @@ pnpm exec eas build --profile preview --platform ios
 pnpm exec eas build --profile preview --platform android
 ```
 
-Run these commands from the `apps/mobile/` directory, or use pnpm filters from the repo root:
+Or use pnpm filters from the repo root:
 
 ```bash
 pnpm --filter mobile eas-build:development
