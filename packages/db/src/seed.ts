@@ -1,4 +1,5 @@
 import { drizzle } from 'drizzle-orm/postgres-js';
+import { eq } from 'drizzle-orm';
 import postgres from 'postgres';
 
 import * as schema from './schema';
@@ -13,19 +14,32 @@ async function seed() {
   const client = postgres(databaseUrl);
   const db = drizzle(client, { schema });
 
-  console.log('Seeding database...');
+  try {
+    console.log('Seeding database...');
 
-  const [user] = await db
-    .insert(schema.users)
-    .values({
-      email: 'dev@budgetino.app',
-      name: 'Dev User',
-      avatarUrl: 'https://api.dicebear.com/7.x/thumbs/svg?seed=budgetino',
-    })
-    .onConflictDoNothing({ target: schema.users.email })
-    .returning();
+    const [inserted] = await db
+      .insert(schema.users)
+      .values({
+        email: 'dev@budgetino.app',
+        name: 'Dev User',
+        avatarUrl: 'https://api.dicebear.com/7.x/thumbs/svg?seed=budgetino',
+      })
+      .onConflictDoNothing({ target: schema.users.email })
+      .returning();
 
-  if (user) {
+    const user =
+      inserted ??
+      (
+        await db
+          .select()
+          .from(schema.users)
+          .where(eq(schema.users.email, 'dev@budgetino.app'))
+      )[0];
+
+    if (!user) {
+      throw new Error('Failed to find or create seed user.');
+    }
+
     await db
       .insert(schema.userPreferences)
       .values({
@@ -36,13 +50,11 @@ async function seed() {
       })
       .onConflictDoNothing({ target: schema.userPreferences.userId });
 
-    console.log(`Created user: ${user.email} (${user.id})`);
-  } else {
-    console.log('User already exists, skipping seed.');
+    console.log(`Seeded user: ${user.email} (${user.id})`);
+    console.log('Seeding complete.');
+  } finally {
+    await client.end();
   }
-
-  console.log('Seeding complete.');
-  await client.end();
 }
 
 seed().catch((error) => {

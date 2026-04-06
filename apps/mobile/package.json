@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@types/react": "~18.3.1",
+    "@budgetino/typescript-config": "workspace:*",
     "rimraf": "^5.0.10",
     "typescript": "^5.7.3"
   }
