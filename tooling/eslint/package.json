@@ -2,9 +2,30 @@
   "name": "@budgetino/eslint-config",
   "version": "0.0.0",
   "private": true,
-  "main": "index.js",
+  "main": "base.js",
   "exports": {
-    ".": "./index.js"
+    ".": "./base.js",
+    "./base": "./base.js",
+    "./nextjs": "./nextjs.js",
+    "./react-native": "./react-native.js"
   },
-  "files": ["index.js"]
+  "files": [
+    "base.js",
+    "nextjs.js",
+    "react-native.js"
+  ],
+  "dependencies": {
+    "@eslint/js": "^9.25.0",
+    "@next/eslint-plugin-next": "^15.3.1",
+    "eslint-plugin-check-file": "^2.8.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "globals": "^16.0.0",
+    "typescript-eslint": "^8.31.0"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0",
+    "typescript": "^5.0.0"
+  }
 }

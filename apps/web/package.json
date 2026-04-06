@@ -5,7 +5,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev --turbopack",
-    "lint": "next lint",
+    "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "clean": "rimraf .next"
   },
@@ -15,12 +15,12 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "@budgetino/eslint-config": "workspace:*",
     "@budgetino/typescript-config": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "^15.5.14",
     "rimraf": "^5.0.10",
     "typescript": "^5.7.3"
   }

@@ -1,1 +1,1 @@
-export { users, userPreferences } from './user';
+export { userPreferences, users } from './user';
