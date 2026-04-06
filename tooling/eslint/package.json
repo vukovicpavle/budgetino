@@ -2,7 +2,7 @@
   "name": "@budgetino/eslint-config",
   "version": "0.0.0",
   "private": true,
-  "main": "index.js",
+  "main": "base.js",
   "exports": {
     ".": "./base.js",
     "./base": "./base.js",
@@ -10,7 +10,6 @@
     "./react-native": "./react-native.js"
   },
   "files": [
-    "index.js",
     "base.js",
     "nextjs.js",
     "react-native.js"
