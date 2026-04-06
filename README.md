@@ -96,21 +96,21 @@ pnpm lint
 
 ### EAS Build (Mobile)
 
-> **Prerequisites:** Install the [EAS CLI](https://docs.expo.dev/build/introduction/) (`>= 14.0.0`) globally: `pnpm add -g eas-cli`
+> **Prerequisites:** `eas-cli` (`>= 14.0.0`) is included as a devDependency. Run `pnpm install` from the repo root to set it up.
 
 ```bash
 # Build for development (dev client with simulator support)
-eas build --profile development
+pnpm exec eas build --profile development
 
 # Build for preview (internal distribution for testing)
-eas build --profile preview
+pnpm exec eas build --profile preview
 
 # Build for production (store-ready build)
-eas build --profile production
+pnpm exec eas build --profile production
 
 # Platform-specific builds
-eas build --profile preview --platform ios
-eas build --profile preview --platform android
+pnpm exec eas build --profile preview --platform ios
+pnpm exec eas build --profile preview --platform android
 ```
 
 Run these commands from the `apps/mobile/` directory, or use pnpm filters from the repo root:
@@ -121,13 +121,13 @@ pnpm --filter mobile eas-build:preview
 pnpm --filter mobile eas-build:production
 ```
 
-**Environment Variables:** Set secrets via the EAS dashboard or CLI — do not commit secrets to source code:
+**Secrets:** Set secrets via the EAS dashboard or CLI — do not commit secrets to source code:
 
 ```bash
 eas secret:create --name API_URL --value "https://api.example.com"
 ```
 
-See [EAS environment variables](https://docs.expo.dev/build-reference/variables/) for more details.
+See [EAS secrets](https://docs.expo.dev/build-reference/variables/#using-secrets-in-environment-variables) for more details.
 
 ## Milestones
 
