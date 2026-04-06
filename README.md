@@ -99,20 +99,18 @@ pnpm lint
 > **Prerequisites:** `eas-cli` (`18.4.0`) is included as a devDependency. Run `pnpm install` from the repo root to set it up.
 
 ```bash
-cd apps/mobile
-
 # Build for development (dev client with simulator support)
-pnpm exec eas build --profile development
+cd apps/mobile && pnpm exec eas build --profile development
 
 # Build for preview (internal distribution for testing)
-pnpm exec eas build --profile preview
+cd apps/mobile && pnpm exec eas build --profile preview
 
 # Build for production (store-ready build)
-pnpm exec eas build --profile production
+cd apps/mobile && pnpm exec eas build --profile production
 
 # Platform-specific builds
-pnpm exec eas build --profile preview --platform ios
-pnpm exec eas build --profile preview --platform android
+cd apps/mobile && pnpm exec eas build --profile preview --platform ios
+cd apps/mobile && pnpm exec eas build --profile preview --platform android
 ```
 
 Or use pnpm filters from the repo root:
@@ -126,7 +124,7 @@ pnpm --filter mobile eas-build:production
 **Secrets:** Set secrets via the EAS dashboard or CLI — do not commit secrets to source code. When using the CLI, omit `--value` so EAS prompts for the secret instead of storing it in shell history:
 
 ```bash
-pnpm exec eas secret:create --name API_URL
+cd apps/mobile && pnpm exec eas secret:create --name API_URL
 ```
 
 See [EAS secrets](https://docs.expo.dev/build-reference/variables/#using-secrets-in-environment-variables) for more details.
