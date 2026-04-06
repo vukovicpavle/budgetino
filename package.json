@@ -33,5 +33,10 @@
     "node": ">=20.19.0",
     "pnpm": ">=9"
   },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "^19"
+    }
+  },
   "packageManager": "pnpm@9.15.9"
 }
