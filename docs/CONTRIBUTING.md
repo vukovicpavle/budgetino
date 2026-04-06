@@ -531,7 +531,6 @@ An issue receives the `ready` label ONLY when ALL of the following are filled:
    ```
 
 2. **Start an emulator/simulator:**
-
    - **Android:** Launch an Android emulator via Android Studio or `emulator -avd <name>`
    - **iOS (macOS only):** Launch an iOS simulator via Xcode or `open -a Simulator`
 
