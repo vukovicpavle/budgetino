@@ -2,4 +2,4 @@ blank_issues_enabled: false
 contact_links:
   - name: 💬 Discussions
     url: https://github.com/vukovicpavle/budgetino/discussions
-    about: "Use discussions for questions, ideas, and general conversation."
+    about: 'Use discussions for questions, ideas, and general conversation.'

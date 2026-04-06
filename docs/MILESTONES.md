@@ -7,14 +7,14 @@
 
 ## Milestone Overview
 
-| Milestone | Name | Duration | Description |
-|-----------|------|----------|-------------|
-| **M0** | 🏗️ Project Setup | Day 1 | Repo scaffolding, CI/CD, tooling, DB, auth |
-| **M1** | 💰 Budget Management | Day 2–3 | Budget CRUD, categories, expense tracking |
-| **M2** | 🔄 Subscription Tracking | Day 3–4 | Subscription CRUD, auto-deduction |
-| **M3** | 📊 Dashboard & Analytics | Day 5 | Spending overview, charts, insights |
-| **M4** | 🔔 Notifications & Polish | Day 6 | Reminders, UX polish, responsive, PWA |
-| **M5** | 🚀 Launch Prep | Day 7 | Testing, performance, docs, deployment |
+| Milestone | Name                      | Duration | Description                                |
+| --------- | ------------------------- | -------- | ------------------------------------------ |
+| **M0**    | 🏗️ Project Setup          | Day 1    | Repo scaffolding, CI/CD, tooling, DB, auth |
+| **M1**    | 💰 Budget Management      | Day 2–3  | Budget CRUD, categories, expense tracking  |
+| **M2**    | 🔄 Subscription Tracking  | Day 3–4  | Subscription CRUD, auto-deduction          |
+| **M3**    | 📊 Dashboard & Analytics  | Day 5    | Spending overview, charts, insights        |
+| **M4**    | 🔔 Notifications & Polish | Day 6    | Reminders, UX polish, responsive, PWA      |
+| **M5**    | 🚀 Launch Prep            | Day 7    | Testing, performance, docs, deployment     |
 
 ---
 
@@ -25,6 +25,7 @@
 **Summary:** Set up the monorepo structure with `apps/web`, `apps/mobile`, and `packages/*` workspaces.
 
 **Tasks:**
+
 - Initialize Turborepo with pnpm workspaces
 - Create `apps/web` (Next.js 15), `apps/mobile` (Expo 55)
 - Create `packages/ui`, `packages/api`, `packages/db`, `packages/auth`, `packages/shared`
@@ -39,6 +40,7 @@
 **Summary:** Set up shared TypeScript configuration with strict mode.
 
 **Tasks:**
+
 - Create base `tsconfig.json` in `tooling/typescript/`
 - Extend in each app and package
 - Enable strict mode, path aliases (`@/`)
@@ -51,6 +53,7 @@
 **Summary:** Configure linting and formatting with shared configs.
 
 **Tasks:**
+
 - Create shared ESLint config in `tooling/eslint/`
 - Configure rules: import ordering, no unused vars, React rules, kebab-case file naming
 - Create Prettier config in `tooling/prettier/`
@@ -65,6 +68,7 @@
 **Summary:** Configure Tailwind for web (Next.js) and mobile (NativeWind/Expo).
 
 **Tasks:**
+
 - Install and configure Tailwind CSS in `apps/web`
 - Install and configure NativeWind in `apps/mobile`
 - Create shared Tailwind config in `tooling/tailwind/`
@@ -78,6 +82,7 @@
 **Summary:** Initialize shadcn/ui in the shared `packages/ui` package.
 
 **Tasks:**
+
 - Initialize shadcn/ui in `packages/ui`
 - Install base components: Button, Card, Input, Dialog, Badge, Form, Select, Tabs
 - Set up `cn()` utility with clsx + tailwind-merge
@@ -91,6 +96,7 @@
 **Summary:** Configure Supabase for local development and production.
 
 **Tasks:**
+
 - Set up Supabase CLI for local development (Docker)
 - Create Supabase project (cloud) for staging/production
 - Configure environment variables (`.env.local`, `.env.example`)
@@ -104,6 +110,7 @@
 **Summary:** Configure Drizzle ORM in `packages/db` with the base schema.
 
 **Tasks:**
+
 - Install Drizzle ORM + drizzle-kit
 - Create `drizzle.config.ts`
 - Create initial schema: `users`, `user_preferences` tables
@@ -118,6 +125,7 @@
 **Summary:** Implement authentication using Supabase Auth with GitHub as the OAuth provider.
 
 **Tasks:**
+
 - Configure GitHub OAuth app (Client ID/Secret)
 - Set up Supabase Auth in `packages/auth`
 - Create auth middleware for Next.js
@@ -133,6 +141,7 @@
 **Summary:** Configure tRPC server in Next.js API routes and clients in both apps.
 
 **Tasks:**
+
 - Set up tRPC server in `packages/api`
 - Create tRPC context with Supabase auth session
 - Set up tRPC HTTP handler in `apps/web/app/api/trpc/[trpc]/route.ts`
@@ -148,6 +157,7 @@
 **Summary:** Create CI workflow that runs on every PR.
 
 **Tasks:**
+
 - Create `.github/workflows/ci.yml`
 - Jobs: install, type-check, lint, format-check, unit-test, build
 - Configure caching (pnpm store, Next.js build cache)
@@ -161,6 +171,7 @@
 **Summary:** Configure Vitest across all packages.
 
 **Tasks:**
+
 - Install Vitest with workspace config
 - Create shared Vitest config in `tooling/`
 - Set up test utilities (mocks for Supabase, tRPC)
@@ -174,6 +185,7 @@
 **Summary:** Configure Playwright for web E2E tests.
 
 **Tasks:**
+
 - Install Playwright in `apps/web`
 - Configure `playwright.config.ts`
 - Write first E2E test (landing page loads)
@@ -187,6 +199,7 @@
 **Summary:** Configure Maestro for mobile E2E tests.
 
 **Tasks:**
+
 - Install Maestro
 - Create first flow: app launches and shows login screen
 - Document how to run locally
@@ -199,6 +212,7 @@
 **Summary:** Configure Vercel for automatic web deployment.
 
 **Tasks:**
+
 - Connect Vercel to GitHub repo
 - Configure build settings for monorepo (root: `apps/web`)
 - Set environment variables
@@ -212,6 +226,7 @@
 **Summary:** Configure Expo Application Services for mobile builds.
 
 **Tasks:**
+
 - Initialize EAS in `apps/mobile`
 - Configure `eas.json` (development, preview, production profiles)
 - Set up environment variables / secrets
@@ -225,6 +240,7 @@
 **Summary:** Install i18n libraries and establish the translation key pattern so all user-facing strings use `t()` from day one. MVP ships English-only.
 
 **Tasks:**
+
 - Install `next-intl` in `apps/web`
 - Install `i18next`, `react-i18next`, `expo-localization` in `apps/mobile`
 - Create `packages/shared/src/i18n/locales/en.json` with initial key structure
@@ -245,6 +261,7 @@
 **Summary:** Define the `budget_categories` table and seed default categories.
 
 **Tasks:**
+
 - Create schema: id, user_id, name, color, icon, is_default, sort_order, timestamps
 - Create migration
 - Seed defaults: Food, Transport, Entertainment, Shopping, Health, Bills, Education, Other
@@ -257,6 +274,7 @@
 **Summary:** Define the `budgets` table.
 
 **Tasks:**
+
 - Create schema: id, user_id, name, amount, currency, period (monthly/weekly/yearly/custom), start_date, timestamps
 - Create migration
 - Add indexes on user_id
@@ -268,6 +286,7 @@
 **Summary:** Define the `expenses` table.
 
 **Tasks:**
+
 - Create schema: id, user_id, budget_id, category_id, amount, currency, description, date, is_recurring, subscription_id, timestamps
 - Create migration
 - Add indexes on user_id, budget_id, date
@@ -279,6 +298,7 @@
 **Summary:** Implement tRPC procedures for managing budget categories.
 
 **Tasks:**
+
 - `category.list` — List user's categories (defaults + custom)
 - `category.create` — Create custom category
 - `category.update` — Edit category (name, color, icon)
@@ -294,6 +314,7 @@
 **Summary:** Implement tRPC procedures for managing budgets.
 
 **Tasks:**
+
 - `budget.create` — Create budget with name, amount, currency, period
 - `budget.list` — List budgets with current spending totals
 - `budget.getById` — Get budget with expenses and remaining amount
@@ -308,6 +329,7 @@
 **Summary:** Implement tRPC procedures for managing expenses.
 
 **Tasks:**
+
 - `expense.create` — Add expense with amount, currency, category, budget, date, description
 - `expense.list` — List expenses with filters (date range, category, budget) + cursor pagination
 - `expense.getById` — Get single expense
@@ -322,6 +344,7 @@
 **Summary:** Create screens for viewing and managing budget categories.
 
 **Tasks:**
+
 - Category list screen with colored icons
 - Add category dialog/sheet
 - Edit category (inline or dialog)
@@ -336,6 +359,7 @@
 **Summary:** Create screens for creating and viewing budgets.
 
 **Tasks:**
+
 - Budget list screen with cards showing name, amount, spent, remaining
 - Progress bar showing budget utilization
 - Create budget form (dialog on web, screen on mobile)
@@ -351,6 +375,7 @@
 **Summary:** Create screens for adding and viewing expenses.
 
 **Tasks:**
+
 - Expense list with grouping by date
 - Quick-add expense form (amount, category, description)
 - Full expense form (all fields)
@@ -368,6 +393,7 @@
 **Summary:** When a new user signs up, automatically create their default budget categories.
 
 **Tasks:**
+
 - Listen for Supabase auth `user.created` event (webhook or trigger)
 - Copy default categories to the new user's account
 - Handle edge cases (user already has categories, failed seeding)
@@ -381,6 +407,7 @@
 **Summary:** Define the `subscriptions` table.
 
 **Tasks:**
+
 - Create schema: id, user_id, budget_id, category_id, name, amount, currency, frequency, next_billing_date, start_date, is_active, timestamps
 - Frequency enum: weekly, biweekly, monthly, quarterly, yearly
 - Create migration
@@ -393,6 +420,7 @@
 **Summary:** Implement tRPC procedures for managing subscriptions.
 
 **Tasks:**
+
 - `subscription.create` — Add subscription with all fields
 - `subscription.list` — List active (and optionally inactive) subscriptions
 - `subscription.getById` — Get subscription with upcoming billing info
@@ -408,6 +436,7 @@
 **Summary:** Build the system that auto-creates expenses from due subscriptions.
 
 **Tasks:**
+
 - Create `subscription.processDue` procedure
 - Query subscriptions where `next_billing_date <= today AND is_active = true`
 - For each: create expense record with `is_recurring = true`, `subscription_id`
@@ -423,6 +452,7 @@
 **Summary:** Create screens for managing subscriptions.
 
 **Tasks:**
+
 - Subscription list with cards (name, amount, frequency, next billing date)
 - Active/inactive toggle or filter
 - Add subscription form (name, amount, currency, frequency, start date, category, budget)
@@ -438,6 +468,7 @@
 **Summary:** Create a summary component showing total subscription costs.
 
 **Tasks:**
+
 - Total monthly cost (convert all subscriptions to monthly equivalent)
 - Total yearly cost
 - Breakdown by category
@@ -454,6 +485,7 @@
 **Summary:** Implement tRPC procedures for analytics data.
 
 **Tasks:**
+
 - `analytics.spendingByCategory` — Category breakdown for a period (pie chart data)
 - `analytics.spendingOverTime` — Daily/weekly/monthly spending (line chart data)
 - `analytics.budgetVsActual` — Budget utilization per budget
@@ -468,6 +500,7 @@
 **Summary:** Create the main dashboard with key financial metrics.
 
 **Tasks:**
+
 - Total balance / remaining budget for current period
 - Quick-add expense button (prominent)
 - Recent expenses list (last 5–10)
@@ -483,6 +516,7 @@
 **Summary:** Create a pie/donut chart showing spending breakdown by category.
 
 **Tasks:**
+
 - Pie/donut chart with category colors
 - Period selector (this week, this month, this year, custom)
 - Legend with amounts and percentages
@@ -496,6 +530,7 @@
 **Summary:** Create a line/bar chart showing spending trends.
 
 **Tasks:**
+
 - Line or bar chart showing daily/weekly/monthly spending
 - Overlay budget limit line
 - Period selector
@@ -509,6 +544,7 @@
 **Summary:** Create a view comparing budgeted amounts to actual spending.
 
 **Tasks:**
+
 - List of budgets with progress bars
 - Color coding: green (<80%), yellow (80–100%), red (>100%)
 - Amount remaining or overspent
@@ -524,6 +560,7 @@
 **Summary:** Notify users before a subscription renews.
 
 **Tasks:**
+
 - Check for subscriptions billing in the next 3 days
 - Push notification (mobile) via Expo Notifications
 - In-app notification banner (web + mobile)
@@ -537,6 +574,7 @@
 **Summary:** Warn users when approaching or exceeding budget limits.
 
 **Tasks:**
+
 - Alert at 80% budget utilization
 - Alert at 100% budget utilization
 - In-app banner/toast notification
@@ -550,6 +588,7 @@
 **Summary:** Add dark mode support across web and mobile.
 
 **Tasks:**
+
 - CSS variables for light/dark themes (Tailwind)
 - System preference detection
 - Manual toggle in settings
@@ -563,6 +602,7 @@
 **Summary:** Create user settings screen.
 
 **Tasks:**
+
 - Profile info (name, email, avatar from GitHub)
 - Default currency selector
 - Theme preference (light/dark/system)
@@ -577,6 +617,7 @@
 **Summary:** Ensure the web app is fully responsive.
 
 **Tasks:**
+
 - Mobile-first breakpoints
 - Navigation: sidebar on desktop, bottom tab on mobile viewport
 - Dialog vs. full-screen on mobile
@@ -590,6 +631,7 @@
 **Summary:** Polish all screens with proper loading, error, and empty states.
 
 **Tasks:**
+
 - Skeleton loaders for all lists and cards
 - Error boundaries with retry buttons
 - Empty state illustrations/messages for each section
@@ -603,6 +645,7 @@
 **Summary:** Implement the currency system with exchange rate data.
 
 **Tasks:**
+
 - Create `currencies` table with ISO 4217 codes, names, symbols
 - Seed with common currencies (USD, EUR, GBP, JPY, etc.)
 - Integrate exchange rate API (free tier)
@@ -618,6 +661,7 @@
 **Summary:** Achieve minimum 80% coverage on critical paths.
 
 **Tasks:**
+
 - Test all tRPC procedures (budget, expense, subscription, category, analytics)
 - Test utility functions (currency conversion, date calculations)
 - Test Zod validation schemas
@@ -631,6 +675,7 @@
 **Summary:** Cover critical user flows with E2E tests.
 
 **Tasks:**
+
 - Auth flow (sign in with GitHub, sign out)
 - Create budget → add expense → view on dashboard
 - Create subscription → verify in list
@@ -645,6 +690,7 @@
 **Summary:** Cover critical mobile flows with Maestro tests.
 
 **Tasks:**
+
 - Auth flow on mobile
 - Add expense flow
 - Subscription management flow
@@ -658,6 +704,7 @@
 **Summary:** Optimize performance for production.
 
 **Tasks:**
+
 - Analyze Next.js bundle size (next-bundle-analyzer)
 - Implement React.memo / useMemo where needed
 - Optimize database queries (check for N+1)
@@ -672,6 +719,7 @@
 **Summary:** Create comprehensive project documentation.
 
 **Tasks:**
+
 - Update README with project description, screenshots, setup guide
 - Document all environment variables
 - API documentation (auto-generated from tRPC, or manual)
@@ -685,6 +733,7 @@
 **Summary:** Final checks before public launch.
 
 **Tasks:**
+
 - All CI/CD checks pass on `main`
 - Environment variables set in Vercel + EAS
 - Supabase production project configured

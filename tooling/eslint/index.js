@@ -1,2 +1,1 @@
-/** @type {import('eslint').Linter.Config} */
-module.exports = {};
+module.exports = require('./base');
