@@ -508,7 +508,9 @@ An issue receives the `ready` label ONLY when ALL of the following are filled:
 
 ```bash
 # Install Playwright browsers (first time only)
-pnpm --filter web exec playwright install --with-deps
+pnpm --filter web exec playwright install
+# Linux/Ubuntu CI only: install browser OS dependencies too
+# pnpm --filter web exec playwright install --with-deps
 
 # Development mode: run all E2E tests (starts dev server automatically)
 pnpm --filter web e2e
@@ -560,7 +562,6 @@ pnpm --filter web exec playwright test
    ```
 
 2. **Start an emulator/simulator:**
-
    - **Android:** Launch an Android emulator via Android Studio or `emulator -avd <name>`
    - **iOS (macOS only):** Launch an iOS simulator via Xcode or `open -a Simulator`
 
