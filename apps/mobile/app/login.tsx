@@ -38,7 +38,7 @@ export default function LoginScreen() {
         // Use the redirectTo URI as the base so the scheme/path stays a single
         // source of truth (defined above via makeRedirectUri).
         await exchangeCodeForSession(
-          `${redirectTo}?code=${encodeURIComponent(code)}`
+          `${redirectTo}?${new URLSearchParams({ code }).toString()}`
         );
       }
     }
