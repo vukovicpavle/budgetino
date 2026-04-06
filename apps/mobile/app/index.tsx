@@ -1,26 +1,12 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Budgetino</Text>
-      <Text style={styles.subtitle}>Budget and subscription management</Text>
+    <View className="flex-1 items-center justify-center">
+      <Text className="text-2xl font-bold">Budgetino</Text>
+      <Text className="mt-2 text-base text-gray-500">
+        Budget and subscription management
+      </Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  subtitle: {
-    fontSize: 16,
-    marginTop: 8,
-  },
-});
