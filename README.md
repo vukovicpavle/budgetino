@@ -97,6 +97,41 @@ pnpm --filter web e2e
 pnpm lint
 ```
 
+### EAS Build (Mobile)
+
+> **Prerequisites:** `eas-cli` (`18.4.0`) is included as a devDependency. Run `pnpm install` from the repo root to set it up.
+
+```bash
+# Build for development (dev client with simulator support)
+cd apps/mobile && pnpm exec eas build --profile development
+
+# Build for preview (internal distribution for testing)
+cd apps/mobile && pnpm exec eas build --profile preview
+
+# Build for production (store-ready build)
+cd apps/mobile && pnpm exec eas build --profile production
+
+# Platform-specific builds
+cd apps/mobile && pnpm exec eas build --profile preview --platform ios
+cd apps/mobile && pnpm exec eas build --profile preview --platform android
+```
+
+Or use pnpm filters from the repo root:
+
+```bash
+pnpm --filter mobile eas-build:development
+pnpm --filter mobile eas-build:preview
+pnpm --filter mobile eas-build:production
+```
+
+**Secrets:** Set secrets via the EAS dashboard or CLI — do not commit secrets to source code. When using the CLI, omit `--value` so EAS prompts for the secret instead of storing it in shell history:
+
+```bash
+cd apps/mobile && pnpm exec eas secret:create --name API_URL
+```
+
+See [EAS secrets](https://docs.expo.dev/build-reference/variables/#using-secrets-in-environment-variables) for more details.
+
 ### Supabase (Database)
 
 Budgetino uses [Supabase](https://supabase.com) for the database and authentication layer. Local development runs via Docker using the Supabase CLI.
