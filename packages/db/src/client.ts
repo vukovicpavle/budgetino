@@ -16,7 +16,7 @@ export function getSupabase() {
 
   if (!supabaseAnonKey) {
     throw new Error(
-      'Missing environment variable: NEXT_PUBLIC_SUPABASE_ANON_KEY',
+      'Missing environment variable: NEXT_PUBLIC_SUPABASE_ANON_KEY'
     );
   }
 

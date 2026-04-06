@@ -22,15 +22,15 @@ This document describes how to deploy **Budgetino web** to [Vercel](https://verc
 
 ## 2 — Configure Project Settings
 
-In the **Configure Project** screen (or later in *Project → Settings → General*), use the following settings:
+In the **Configure Project** screen (or later in _Project → Settings → General_), use the following settings:
 
-| Setting | Value |
-|---|---|
-| **Root Directory** | *(leave blank — repo root)* |
-| **Framework Preset** | Next.js (auto-detected) |
-| **Build Command** | *(leave blank — uses `vercel.json`)* |
-| **Install Command** | *(leave blank — uses `vercel.json`)* |
-| **Output Directory** | *(leave blank — uses `vercel.json`)* |
+| Setting              | Value                                |
+| -------------------- | ------------------------------------ |
+| **Root Directory**   | _(leave blank — repo root)_          |
+| **Framework Preset** | Next.js (auto-detected)              |
+| **Build Command**    | _(leave blank — uses `vercel.json`)_ |
+| **Install Command**  | _(leave blank — uses `vercel.json`)_ |
+| **Output Directory** | _(leave blank — uses `vercel.json`)_ |
 
 > **Why repo root?**  
 > `vercel.json` lives at the repo root and uses repo-root-relative paths (e.g. `apps/web/.next`
@@ -42,17 +42,17 @@ In the **Configure Project** screen (or later in *Project → Settings → Gener
 
 ## 3 — Set Environment Variables
 
-In *Project → Settings → Environment Variables*, add the following variables.  
+In _Project → Settings → Environment Variables_, add the following variables.  
 Use `.env.example` at the repo root as a reference.
 
 > **Note:** These variables are placeholders for the upcoming Supabase integration and are not yet required by the current codebase. Add them now so deployments are ready once Supabase is wired up.
 
-| Variable | Environments | Description |
-|---|---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | Production, Preview, Development | Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Production, Preview, Development | Supabase public anon key |
-| `SUPABASE_SERVICE_ROLE_KEY` | Production, Preview | Supabase service role key (server-side only) |
-| `NEXT_PUBLIC_APP_URL` | Production, Preview, Development | Base URL, e.g. `https://budgetino.vercel.app` in Vercel or `http://localhost:3000` locally |
+| Variable                        | Environments                     | Description                                                                                |
+| ------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------ |
+| `NEXT_PUBLIC_SUPABASE_URL`      | Production, Preview, Development | Supabase project URL                                                                       |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Production, Preview, Development | Supabase public anon key                                                                   |
+| `SUPABASE_SERVICE_ROLE_KEY`     | Production, Preview              | Supabase service role key (server-side only)                                               |
+| `NEXT_PUBLIC_APP_URL`           | Production, Preview, Development | Base URL, e.g. `https://budgetino.vercel.app` in Vercel or `http://localhost:3000` locally |
 
 > **Security note:** Never commit real keys to source control.  
 > The `.env.example` file contains only placeholder values and is safe to commit.
@@ -63,7 +63,7 @@ Use `.env.example` at the repo root as a reference.
 
 Vercel provides free remote caching for Turborepo on all plans.
 
-1. In the Vercel dashboard, go to *Project → Settings → Turborepo Remote Caching*.
+1. In the Vercel dashboard, go to _Project → Settings → Turborepo Remote Caching_.
 2. Toggle **Enable Remote Caching** on.
 3. Vercel automatically injects `TURBO_TOKEN` and `TURBO_TEAM` into the build environment.
 
@@ -73,11 +73,11 @@ No `turbo.json` changes are required — Turborepo detects Vercel's environment 
 
 ## 5 — Deploy Behaviour
 
-| Event | Deploy Type | Notes |
-|---|---|---|
-| Push to `main` | Production | Automatically triggers a production build |
-| Open / update a PR | Preview | Each PR gets a unique preview URL |
-| Other branches | Preview | Optionally enable in *Project → Settings → Git* |
+| Event              | Deploy Type | Notes                                           |
+| ------------------ | ----------- | ----------------------------------------------- |
+| Push to `main`     | Production  | Automatically triggers a production build       |
+| Open / update a PR | Preview     | Each PR gets a unique preview URL               |
+| Other branches     | Preview     | Optionally enable in _Project → Settings → Git_ |
 
 The `ignoreCommand` in `vercel.json` uses [`turbo-ignore`](https://turbo.build/repo/docs/reference/turbo-ignore) to skip rebuilds when no files affecting the `web` workspace have changed.
 
@@ -101,9 +101,9 @@ pnpm dev:web
 
 ## Troubleshooting
 
-| Problem | Fix |
-|---|---|
+| Problem                                | Fix                                                                            |
+| -------------------------------------- | ------------------------------------------------------------------------------ |
 | Build fails with "workspace not found" | Ensure **Root Directory** is left blank (repo root) in Vercel project settings |
-| Missing env vars at runtime | Add them in *Vercel → Project → Settings → Environment Variables* and redeploy |
-| Preview deploy not triggered on PR | Check *Project → Settings → Git → Preview Branches* configuration |
-| Remote caching not working | Verify **Turborepo Remote Caching** is enabled in Vercel project settings |
+| Missing env vars at runtime            | Add them in _Vercel → Project → Settings → Environment Variables_ and redeploy |
+| Preview deploy not triggered on PR     | Check _Project → Settings → Git → Preview Branches_ configuration              |
+| Remote caching not working             | Verify **Turborepo Remote Caching** is enabled in Vercel project settings      |
