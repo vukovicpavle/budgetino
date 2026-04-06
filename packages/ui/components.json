@@ -10,10 +10,10 @@
     "cssVariables": true
   },
   "aliases": {
-    "components": "@budgetino/ui/components",
-    "utils": "@budgetino/ui/lib/utils",
-    "ui": "@budgetino/ui/components/ui",
-    "lib": "@budgetino/ui/lib"
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib"
   },
   "iconLibrary": "lucide"
 }
