@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "@budgetino/prettier-config": "workspace:*",
+    "@budgetino/typescript-config": "workspace:*",
+    "@types/node": "^20",
     "rimraf": "^5.0.10",
     "typescript": "^5.7.3"
   }
