@@ -1,5 +1,6 @@
-import { Text, View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { StyleSheet, Text, View } from 'react-native';
+
 import { formatCurrency, formatDate } from '@budgetino/shared/i18n';
 
 export default function HomeScreen() {

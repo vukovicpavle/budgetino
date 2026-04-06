@@ -16,7 +16,7 @@
 export function formatCurrency(
   amount: number,
   currencyCode: string,
-  locale: string = 'en',
+  locale: string = 'en'
 ): string {
   return new Intl.NumberFormat(locale, {
     style: 'currency',

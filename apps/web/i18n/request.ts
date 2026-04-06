@@ -1,4 +1,5 @@
 import { getRequestConfig } from 'next-intl/server';
+
 import { defaultLocale } from '@budgetino/shared/i18n';
 
 export default getRequestConfig(async () => ({

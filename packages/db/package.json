@@ -7,7 +7,7 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "echo \"No lint configured yet\"",
+    "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "clean": "rimraf dist"
   },
@@ -15,9 +15,11 @@
     "@supabase/supabase-js": "^2.101.1"
   },
   "devDependencies": {
+    "@budgetino/eslint-config": "workspace:*",
     "@budgetino/prettier-config": "workspace:*",
     "@budgetino/typescript-config": "workspace:*",
     "@types/node": "^20",
+    "eslint": "^9",
     "rimraf": "^5.0.10",
     "typescript": "^5.7.3"
   }

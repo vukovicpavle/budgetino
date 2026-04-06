@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+
 import { formatCurrency, formatDate } from '@budgetino/shared/i18n';
 
 export default function HomePage() {

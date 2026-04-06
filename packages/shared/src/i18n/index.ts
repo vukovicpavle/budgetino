@@ -1,8 +1,3 @@
-export { defaultLocale, locales } from './keys';
+export { formatCurrency, formatDate, formatNumber, formatTime } from './format';
 export type { Locale, Messages, TranslationKey } from './keys';
-export {
-  formatCurrency,
-  formatDate,
-  formatNumber,
-  formatTime,
-} from './format';
+export { defaultLocale, locales } from './keys';
