@@ -112,7 +112,7 @@ pnpm db:start
 # Stop the local Supabase stack
 pnpm db:stop
 
-# Reset the local database (re-runs migrations and seed)
+# Reset the local database
 pnpm db:reset
 
 # Check the status of the local Supabase services
