@@ -1,5 +1,5 @@
 {
-  "extends": "../../tooling/typescript/library.json",
+  "extends": "@budgetino/typescript-config/library.json",
   "compilerOptions": {
     "noEmit": true
   },
