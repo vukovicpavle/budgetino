@@ -546,7 +546,7 @@ An issue receives the `ready` label ONLY when ALL of the following are filled:
    pnpm dev:mobile
    ```
 
-   This starts `expo start`. Use it only after the native app binary is installed, so Maestro can launch the app by its app id (`com.budgetino.app`).
+   This starts `expo start`. Run it after the native app binary is installed. Maestro can launch the installed app by its app id (`com.budgetino.app`) as long as that native build is present; Metro is needed so the Expo development build can load the JavaScript bundle and render the UI (otherwise it may open to a red screen or a "bundler not running" message).
 
 5. **Run Maestro flows against the installed app:**
 
