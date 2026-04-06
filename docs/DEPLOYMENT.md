@@ -45,12 +45,14 @@ In the **Configure Project** screen (or later in *Project → Settings → Gener
 In *Project → Settings → Environment Variables*, add the following variables.  
 Use `.env.example` at the repo root as a reference.
 
+> **Note:** These variables are placeholders for the upcoming Supabase integration and are not yet required by the current codebase. Add them now so deployments are ready once Supabase is wired up.
+
 | Variable | Environments | Description |
 |---|---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` | Production, Preview, Development | Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Production, Preview, Development | Supabase public anon key |
 | `SUPABASE_SERVICE_ROLE_KEY` | Production, Preview | Supabase service role key (server-side only) |
-| `NEXT_PUBLIC_APP_URL` | Production | Base URL, e.g. `https://budgetino.vercel.app` |
+| `NEXT_PUBLIC_APP_URL` | Production, Preview, Development | Base URL, e.g. `https://budgetino.vercel.app` in Vercel or `http://localhost:3000` locally |
 
 > **Security note:** Never commit real keys to source control.  
 > The `.env.example` file contains only placeholder values and is safe to commit.
