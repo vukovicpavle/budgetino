@@ -24,13 +24,17 @@
   },
   "devDependencies": {
     "@budgetino/eslint-config": "workspace:*",
+    "@budgetino/tailwind-config": "workspace:*",
     "@budgetino/typescript-config": "workspace:*",
     "@playwright/test": "^1.59.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.27",
     "eslint": "^9",
+    "postcss": "^8.5.8",
     "rimraf": "^5.0.10",
+    "tailwindcss": "^3.4",
     "typescript": "^5.7.3"
   }
 }

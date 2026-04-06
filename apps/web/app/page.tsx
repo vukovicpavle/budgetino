@@ -6,9 +6,9 @@ export default function HomePage() {
   const t = useTranslations();
 
   return (
-    <main>
-      <h1>{t('auth.welcome')}</h1>
-      <p>{t('budget.title')}</p>
+    <main className="flex min-h-screen flex-col items-center justify-center">
+      <h1 className="text-4xl font-bold">{t('auth.welcome')}</h1>
+      <p className="mt-2 text-muted-foreground">{t('budget.title')}</p>
       <p>
         {t('budget.remaining', {
           amount: formatCurrency(1234.5, 'USD'),

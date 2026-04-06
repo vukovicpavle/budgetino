@@ -5,6 +5,7 @@ import { AuthProvider, useAuth } from '@budgetino/auth/provider';
 
 import { createMobileSupabaseClient } from '../lib/supabase-client';
 
+import '../global.css';
 import '../i18n/config';
 
 function AuthGuard() {
