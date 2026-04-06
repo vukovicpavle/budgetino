@@ -2,6 +2,7 @@
   "name": "@budgetino/db",
   "version": "0.0.0",
   "private": true,
+  "prettier": "@budgetino/prettier-config",
   "exports": {
     ".": "./src/index.ts"
   },
@@ -10,8 +11,12 @@
     "type-check": "tsc --noEmit",
     "clean": "rimraf dist"
   },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.101.1"
+  },
   "devDependencies": {
     "@budgetino/eslint-config": "workspace:*",
+    "@budgetino/prettier-config": "workspace:*",
     "eslint": "^9",
     "rimraf": "^5.0.10",
     "typescript": "^5.7.3"
