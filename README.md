@@ -96,7 +96,7 @@ pnpm lint
 
 ### EAS Build (Mobile)
 
-> **Prerequisites:** Install the [EAS CLI](https://docs.expo.dev/build/introduction/) globally: `npm install -g eas-cli`
+> **Prerequisites:** Install the [EAS CLI](https://docs.expo.dev/build/introduction/) (`>= 14.0.0`) globally: `pnpm add -g eas-cli`
 
 ```bash
 # Build for development (dev client with simulator support)
