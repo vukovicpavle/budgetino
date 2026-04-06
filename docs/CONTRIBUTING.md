@@ -508,17 +508,26 @@ An issue receives the `ready` label ONLY when ALL of the following are filled:
 # Install Playwright browsers (first time only)
 pnpm --filter web exec playwright install --with-deps
 
-# Run all E2E tests (starts dev server automatically)
+# Development mode: run all E2E tests (starts dev server automatically)
 pnpm --filter web e2e
 
-# Run E2E tests with the interactive UI
+# Development mode: run E2E tests with the interactive UI
 pnpm --filter web e2e:ui
 
-# Run a specific test file
+# Development mode: run a specific test file
 pnpm --filter web e2e -- e2e/landing.spec.ts
 
-# Run tests in a specific browser
+# Development mode: run tests in a specific browser
 pnpm --filter web e2e -- --project=chromium
+
+# Production mode: build the app first
+pnpm --filter web build
+
+# Production mode: start the production server
+pnpm --filter web start
+
+# Production mode: in another terminal, run the E2E suite
+pnpm --filter web exec playwright test
 ```
 
 ### Mobile Tests (Maestro — Mobile)
