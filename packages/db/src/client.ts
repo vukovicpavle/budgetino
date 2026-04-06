@@ -1,26 +1,34 @@
-import { createClient } from '@supabase/supabase-js';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 
-let _supabase: ReturnType<typeof createClient> | undefined;
+import * as schema from './schema';
 
-export function getSupabase() {
-  if (_supabase) {
-    return _supabase;
+import type { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
+
+let _db: PostgresJsDatabase<typeof schema> | undefined;
+let _client: ReturnType<typeof postgres> | undefined;
+
+export function getDb() {
+  if (_db) {
+    return _db;
   }
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const databaseUrl = process.env.DATABASE_URL;
 
-  if (!supabaseUrl) {
-    throw new Error('Missing environment variable: NEXT_PUBLIC_SUPABASE_URL');
+  if (!databaseUrl) {
+    throw new Error('Missing environment variable: DATABASE_URL');
   }
 
-  if (!supabaseAnonKey) {
-    throw new Error(
-      'Missing environment variable: NEXT_PUBLIC_SUPABASE_ANON_KEY'
-    );
+  _client = postgres(databaseUrl);
+  _db = drizzle(_client, { schema });
+
+  return _db;
+}
+
+export async function closeDb() {
+  if (_client) {
+    await _client.end();
+    _client = undefined;
+    _db = undefined;
   }
-
-  _supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-  return _supabase;
 }
