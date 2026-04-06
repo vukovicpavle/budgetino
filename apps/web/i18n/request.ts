@@ -1,8 +1,9 @@
 import { getRequestConfig } from 'next-intl/server';
 
 import { defaultLocale } from '@budgetino/shared/i18n';
+import messages from '@budgetino/shared/i18n/locales/en.json';
 
-export default getRequestConfig(async () => ({
+export default getRequestConfig(() => ({
   locale: defaultLocale,
-  messages: (await import('@budgetino/shared/i18n/locales/en.json')).default,
+  messages,
 }));
