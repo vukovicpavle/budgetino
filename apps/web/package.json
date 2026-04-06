@@ -4,23 +4,28 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "start": "next start",
     "dev": "next dev --turbopack",
     "lint": "eslint .",
     "type-check": "tsc --noEmit",
-    "clean": "rimraf .next"
+    "clean": "rimraf .next",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@budgetino/auth": "workspace:*",
-    "@budgetino/shared": "workspace:*",
+    "@budgetino/shared": "workspace:^",
     "@supabase/ssr": "^0.10.0",
     "@supabase/supabase-js": "^2.101.1",
     "next": "^15.5.14",
+    "next-intl": "^4.9.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@budgetino/eslint-config": "workspace:*",
     "@budgetino/typescript-config": "workspace:*",
+    "@playwright/test": "^1.59.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
