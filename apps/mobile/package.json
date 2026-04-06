@@ -9,9 +9,9 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "build": "expo export --platform all --output-dir expo-dist",
-    "eas-build:development": "pnpm exec eas build --profile development",
-    "eas-build:preview": "pnpm exec eas build --profile preview",
-    "eas-build:production": "pnpm exec eas build --profile production",
+    "eas-build:development": "pnpm exec eas build --platform all --profile development",
+    "eas-build:preview": "pnpm exec eas build --platform all --profile preview",
+    "eas-build:production": "pnpm exec eas build --platform all --profile production",
     "type-check": "tsc --noEmit",
     "clean": "rimraf .expo expo-dist"
   },
