@@ -14,6 +14,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - Any path containing a file extension (e.g. .ico, .txt, .xml, .svg, .png, etc.)
      */
-    '/((?!_next/static|_next/image|.*\\..*).*)',
+    '/((?!_next/static|_next/image|.*\\.[^/]+$).*)',
   ],
 };

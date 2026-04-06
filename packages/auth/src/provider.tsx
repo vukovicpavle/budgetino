@@ -125,6 +125,9 @@ export function AuthProvider({
 
   const exchangeCodeForSession = useCallback(
     async (callbackUrl: string): Promise<void> => {
+      const invalidUrlError = new Error(
+        `Invalid callback URL passed to exchangeCodeForSession: ${callbackUrl}`
+      );
       let url: URL;
       try {
         url = new URL(callbackUrl);
@@ -133,14 +136,10 @@ export function AuthProvider({
           try {
             url = new URL(callbackUrl, window.location.origin);
           } catch {
-            throw new Error(
-              `Invalid callback URL passed to exchangeCodeForSession: ${callbackUrl}`
-            );
+            throw invalidUrlError;
           }
         } else {
-          throw new Error(
-            `Invalid callback URL passed to exchangeCodeForSession: ${callbackUrl}`
-          );
+          throw invalidUrlError;
         }
       }
       const code = url.searchParams.get('code');
