@@ -13,7 +13,9 @@
     "e2e:ui": "playwright test --ui"
   },
   "dependencies": {
+    "@budgetino/shared": "workspace:^",
     "next": "^15.5.14",
+    "next-intl": "^4.9.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
