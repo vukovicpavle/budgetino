@@ -125,8 +125,9 @@ export function AuthProvider({
 
   const exchangeCodeForSession = useCallback(
     async (callbackUrl: string): Promise<void> => {
+      const safeUrl = callbackUrl.split('?')[0];
       const invalidUrlError = new Error(
-        `Invalid callback URL passed to exchangeCodeForSession: ${callbackUrl}`
+        `Invalid callback URL passed to exchangeCodeForSession: ${safeUrl}`
       );
       let url: URL;
       try {

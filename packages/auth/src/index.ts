@@ -3,7 +3,6 @@ export {
   createBrowserClient,
   createServerClient,
 } from './client';
-export { updateSession } from './middleware';
 export type {
   AuthContextValue,
   AuthProviderProps,
