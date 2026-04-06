@@ -90,6 +90,9 @@ pnpm type-check
 # Run all tests (not yet wired up — test scripts will be added per package in subsequent milestones)
 pnpm test
 
+# Run Playwright E2E tests (web)
+pnpm --filter web e2e
+
 # Lint all packages
 pnpm lint
 ```

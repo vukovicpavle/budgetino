@@ -499,7 +499,27 @@ An issue receives the `ready` label ONLY when ALL of the following are filled:
 
 - All critical user flows must have E2E tests
 - Test file naming: `<flow-name>.spec.ts`
+- Tests live in `apps/web/e2e/`
 - Must run against both development and production builds
+
+#### Running E2E Tests Locally
+
+```bash
+# Install Playwright browsers (first time only)
+pnpm --filter web exec playwright install --with-deps
+
+# Run all E2E tests (starts dev server automatically)
+pnpm --filter web e2e
+
+# Run E2E tests with the interactive UI
+pnpm --filter web e2e:ui
+
+# Run a specific test file
+pnpm --filter web e2e -- e2e/landing.spec.ts
+
+# Run tests in a specific browser
+pnpm --filter web e2e -- --project=chromium
+```
 
 ### Mobile Tests (Maestro — Mobile)
 
