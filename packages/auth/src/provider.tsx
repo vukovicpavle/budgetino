@@ -125,7 +125,24 @@ export function AuthProvider({
 
   const exchangeCodeForSession = useCallback(
     async (callbackUrl: string): Promise<void> => {
-      const url = new URL(callbackUrl);
+      let url: URL;
+      try {
+        url = new URL(callbackUrl);
+      } catch {
+        if (typeof window !== 'undefined' && window.location?.origin) {
+          try {
+            url = new URL(callbackUrl, window.location.origin);
+          } catch {
+            throw new Error(
+              `Invalid callback URL passed to exchangeCodeForSession: ${callbackUrl}`
+            );
+          }
+        } else {
+          throw new Error(
+            `Invalid callback URL passed to exchangeCodeForSession: ${callbackUrl}`
+          );
+        }
+      }
       const code = url.searchParams.get('code');
       if (code) {
         await supabase.auth.exchangeCodeForSession(code);

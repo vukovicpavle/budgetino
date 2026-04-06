@@ -3,7 +3,7 @@
   "compilerOptions": {
     "noEmit": true,
     "lib": ["dom", "dom.iterable", "esnext"],
-    "types": ["node"]
+    "types": ["node", "react"]
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
