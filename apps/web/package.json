@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@budgetino/eslint-config": "workspace:*",
+    "@budgetino/typescript-config": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

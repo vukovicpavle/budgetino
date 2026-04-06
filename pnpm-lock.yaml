@@ -57,6 +57,9 @@ importers:
       '@budgetino/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
+      '@budgetino/typescript-config':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
       '@types/react':
         specifier: ~18.3.1
         version: 18.3.28
@@ -85,6 +88,9 @@ importers:
       '@budgetino/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
+      '@budgetino/typescript-config':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
       '@types/node':
         specifier: ^20
         version: 20.19.39
@@ -109,6 +115,9 @@ importers:
       '@budgetino/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
+      '@budgetino/typescript-config':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
       eslint:
         specifier: ^9
         version: 9.39.4
@@ -124,6 +133,9 @@ importers:
       '@budgetino/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
+      '@budgetino/typescript-config':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
       eslint:
         specifier: ^9
         version: 9.39.4
@@ -146,6 +158,12 @@ importers:
       '@budgetino/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
+      '@budgetino/typescript-config':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      '@types/node':
+        specifier: ^20
+        version: 20.19.39
       eslint:
         specifier: ^9
         version: 9.39.4
@@ -161,6 +179,9 @@ importers:
       '@budgetino/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
+      '@budgetino/typescript-config':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
       eslint:
         specifier: ^9
         version: 9.39.4
@@ -180,6 +201,9 @@ importers:
       '@budgetino/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
+      '@budgetino/typescript-config':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
       eslint:
         specifier: ^9
         version: 9.39.4

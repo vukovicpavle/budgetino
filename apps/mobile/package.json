@@ -27,6 +27,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@budgetino/eslint-config": "workspace:*",
+    "@budgetino/typescript-config": "workspace:*",
     "@types/react": "~18.3.1",
     "eslint": "^9",
     "rimraf": "^5.0.10",

@@ -6,6 +6,7 @@
     "base.json",
     "nextjs.json",
     "react-library.json",
-    "expo.json"
+    "react-native.json",
+    "library.json"
   ]
 }
