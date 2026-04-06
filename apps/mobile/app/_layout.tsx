@@ -5,6 +5,8 @@ import { AuthProvider, useAuth } from '@budgetino/auth/provider';
 
 import { createMobileSupabaseClient } from '../lib/supabase-client';
 
+import '../i18n/config';
+
 function AuthGuard() {
   const { user, isLoading } = useAuth();
   const segments = useSegments();
@@ -24,8 +26,6 @@ function AuthGuard() {
 
   return null;
 }
-
-import '../i18n/config';
 
 export default function RootLayout() {
   return (
