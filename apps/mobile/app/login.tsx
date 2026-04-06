@@ -35,9 +35,9 @@ export default function LoginScreen() {
       const parsed = Linking.parse(result.url);
       const code = parsed.queryParams?.code;
       if (typeof code === 'string') {
-        // Reconstruct a full URL so that exchangeCodeForSession can extract
-        // the code via URLSearchParams in the provider.
-        await exchangeCodeForSession(`budgetino://auth/callback?code=${code}`);
+        // Use the redirectTo URI as the base so the scheme/path stays a single
+        // source of truth (defined above via makeRedirectUri).
+        await exchangeCodeForSession(`${redirectTo}?code=${code}`);
       }
     }
   }
