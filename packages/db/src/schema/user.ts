@@ -10,7 +10,8 @@ export const users = pgTable('users', {
     .defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true })
     .notNull()
-    .defaultNow(),
+    .defaultNow()
+    .$onUpdateFn(() => new Date()),
 });
 
 export const userPreferences = pgTable('user_preferences', {
