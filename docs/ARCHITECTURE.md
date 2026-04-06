@@ -440,12 +440,17 @@ const dateStr = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
-  "pipeline": {
-    "build": { "dependsOn": ["^build"], "outputs": [".next/**", "dist/**"] },
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", "expo-dist/**"],
+    },
     "dev": { "cache": false, "persistent": true },
-    "lint": { "dependsOn": ["^build"] },
-    "type-check": { "dependsOn": ["^build"] },
-    "test": { "dependsOn": ["^build"] },
+    "lint": { "dependsOn": ["^lint"] },
+    "type-check": { "dependsOn": ["^type-check"] },
+    "test": { "dependsOn": ["^build"], "outputs": ["coverage/**"] },
+    "format:check": {},
+    "clean": { "cache": false },
   },
 }
 ```

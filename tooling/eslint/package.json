@@ -10,6 +10,7 @@
     "./react-native": "./react-native.js"
   },
   "files": [
+    "index.js",
     "base.js",
     "nextjs.js",
     "react-native.js"
