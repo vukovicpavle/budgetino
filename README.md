@@ -94,6 +94,41 @@ pnpm test
 pnpm lint
 ```
 
+### EAS Build (Mobile)
+
+> **Prerequisites:** Install the [EAS CLI](https://docs.expo.dev/build/introduction/) globally: `npm install -g eas-cli`
+
+```bash
+# Build for development (dev client with simulator support)
+eas build --profile development
+
+# Build for preview (internal distribution for testing)
+eas build --profile preview
+
+# Build for production (store-ready build)
+eas build --profile production
+
+# Platform-specific builds
+eas build --profile preview --platform ios
+eas build --profile preview --platform android
+```
+
+Run these commands from the `apps/mobile/` directory, or use pnpm filters from the repo root:
+
+```bash
+pnpm --filter mobile eas-build:development
+pnpm --filter mobile eas-build:preview
+pnpm --filter mobile eas-build:production
+```
+
+**Environment Variables:** Set secrets via the EAS dashboard or CLI — do not commit secrets to source code:
+
+```bash
+eas secret:create --name API_URL --value "https://api.example.com"
+```
+
+See [EAS environment variables](https://docs.expo.dev/build-reference/variables/) for more details.
+
 ## Milestones
 
 | # | Milestone | Timeline |
