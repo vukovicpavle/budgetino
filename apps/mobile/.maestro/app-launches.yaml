@@ -1,8 +1,10 @@
 appId: com.budgetino.app
-# This Maestro flow launches the native app bundle id directly.
+# This Maestro flow launches an installed native app by its Android package
+# name or iOS bundle identifier.
 # It requires a dev/native build installed on the emulator/simulator
-# (for example via `expo run:ios`, `expo run:android`, or EAS),
-# and will not work when running only through Expo Go (`expo start`).
+# (for example via `expo run:ios`, `expo run:android`, or EAS).
+# It will not work with Expo Go, though Metro may still need to be running
+# when using a development build.
 ---
 - launchApp
 - assertVisible: 'Budgetino'
