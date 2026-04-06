@@ -28,8 +28,13 @@ export async function createSupabaseServerClient(): Promise<SupabaseClient> {
         return cookieStore.getAll();
       },
       setAll(cookiesToSet) {
-        for (const { name, value, options } of cookiesToSet) {
-          cookieStore.set(name, value, options);
+        try {
+          for (const { name, value, options } of cookiesToSet) {
+            cookieStore.set(name, value, options);
+          }
+        } catch {
+          // `cookies()` can be read-only in Server Components.
+          // Ignore write failures here and rely on middleware for session refresh.
         }
       },
     },

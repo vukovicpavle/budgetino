@@ -17,7 +17,10 @@ export async function updateSession(
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
   if (!supabaseUrl || !supabaseAnonKey) {
-    return response;
+    return new NextResponse(
+      'Supabase middleware configuration is missing required environment variables.',
+      { status: 500 }
+    );
   }
 
   const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
@@ -56,14 +59,22 @@ export async function updateSession(
   if (!user && !isAuthRoute) {
     const loginUrl = request.nextUrl.clone();
     loginUrl.pathname = '/login';
-    return NextResponse.redirect(loginUrl);
+    const redirectResponse = NextResponse.redirect(loginUrl);
+    for (const cookie of response.cookies.getAll()) {
+      redirectResponse.cookies.set(cookie);
+    }
+    return redirectResponse;
   }
 
   // Redirect authenticated users away from the login page.
   if (user && pathname.startsWith('/login')) {
     const homeUrl = request.nextUrl.clone();
     homeUrl.pathname = '/';
-    return NextResponse.redirect(homeUrl);
+    const redirectResponse = NextResponse.redirect(homeUrl);
+    for (const cookie of response.cookies.getAll()) {
+      redirectResponse.cookies.set(cookie);
+    }
+    return redirectResponse;
   }
 
   return response;

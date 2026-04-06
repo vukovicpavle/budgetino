@@ -73,11 +73,23 @@ export function AuthProvider({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    void supabase.auth.getSession().then(({ data: { session: s } }) => {
-      setSession(s);
-      setUser(s?.user ?? null);
-      setIsLoading(false);
-    });
+    void (async () => {
+      try {
+        const {
+          data: { session: s },
+          error,
+        } = await supabase.auth.getSession();
+        if (error) {
+          throw error;
+        }
+        setSession(s);
+        setUser(s?.user ?? null);
+      } catch (err) {
+        console.error('Failed to get initial auth session', err);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
 
     const {
       data: { subscription },
@@ -96,13 +108,16 @@ export function AuthProvider({
     async (
       options?: SignInWithGitHubOptions
     ): Promise<{ url: string | null }> => {
-      const { data } = await supabase.auth.signInWithOAuth({
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'github',
         options: {
           redirectTo: options?.redirectTo,
           skipBrowserRedirect: options?.skipBrowserRedirect,
         },
       });
+      if (error) {
+        throw error;
+      }
       return { url: data.url };
     },
     [supabase]
