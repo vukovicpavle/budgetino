@@ -513,8 +513,15 @@ An issue receives the `ready` label ONLY when ALL of the following are filled:
 
 1. **Install Maestro CLI** (macOS/Linux):
 
+   Prefer the official installation instructions from Maestro:
+   <https://maestro.mobile.dev/getting-started/installing-maestro>
+
+   If you use the installer script, download it first, inspect it, and then run it:
+
    ```bash
-   curl -Ls 'https://get.maestro.mobile.dev' | bash
+   curl -Ls 'https://get.maestro.mobile.dev' -o install-maestro.sh
+   # Review the script before executing it
+   bash install-maestro.sh
    ```
 
    Verify the installation:
