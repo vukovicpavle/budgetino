@@ -1,5 +1,7 @@
 # 💰 Budgetino
 
+[![CI](https://github.com/vukovicpavle/budgetino/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/vukovicpavle/budgetino/actions/workflows/ci.yml)
+
 A cross-platform budget and subscription management app built with Next.js 15 and Expo 55.
 
 ## Features (MVP)
