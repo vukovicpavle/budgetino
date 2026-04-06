@@ -10,10 +10,14 @@
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "test": "node -e \"process.exit(0)\"",
-    "format:check": "turbo format:check",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
     "clean": "turbo clean"
   },
+  "prettier": "@budgetino/prettier-config",
   "devDependencies": {
+    "@budgetino/prettier-config": "workspace:*",
+    "prettier": "^3.5.3",
     "turbo": "^2.9.3",
     "typescript": "^5.7.3"
   },

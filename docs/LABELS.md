@@ -66,53 +66,53 @@ echo "✅ Labels created successfully!"
 
 ### Type Labels
 
-| Label | Color | Description |
-|-------|-------|-------------|
-| `feature` | 🟢 `#0E8A16` | New feature request |
-| `bug` | 🔴 `#D73A4A` | Bug report |
-| `refactor` | 🟡 `#E4E669` | Code refactoring |
-| `docs` | 🔵 `#0075CA` | Documentation |
-| `chore` | ⚪ `#BFDADC` | Maintenance, tooling, CI |
-| `test` | 🔵 `#BFD4F2` | Testing related |
+| Label      | Color        | Description              |
+| ---------- | ------------ | ------------------------ |
+| `feature`  | 🟢 `#0E8A16` | New feature request      |
+| `bug`      | 🔴 `#D73A4A` | Bug report               |
+| `refactor` | 🟡 `#E4E669` | Code refactoring         |
+| `docs`     | 🔵 `#0075CA` | Documentation            |
+| `chore`    | ⚪ `#BFDADC` | Maintenance, tooling, CI |
+| `test`     | 🔵 `#BFD4F2` | Testing related          |
 
 ### Workflow Labels
 
-| Label | Color | Description |
-|-------|-------|-------------|
-| `needs-triage` | 🟡 `#FBCA04` | Needs review and prioritization |
-| `ready` | 🔵 `#0075CA` | All sections filled, ready for dev |
-| `in-progress` | 🟣 `#6F42C1` | Currently being worked on |
-| `in-review` | 🔵 `#1D76DB` | PR open, awaiting review |
-| `blocked` | 🔴 `#B60205` | Blocked by dependency |
-| `wontfix` | ⚪ `#FFFFFF` | Will not be addressed |
-| `duplicate` | ⚪ `#CFD3D7` | Duplicate of another issue |
+| Label          | Color        | Description                        |
+| -------------- | ------------ | ---------------------------------- |
+| `needs-triage` | 🟡 `#FBCA04` | Needs review and prioritization    |
+| `ready`        | 🔵 `#0075CA` | All sections filled, ready for dev |
+| `in-progress`  | 🟣 `#6F42C1` | Currently being worked on          |
+| `in-review`    | 🔵 `#1D76DB` | PR open, awaiting review           |
+| `blocked`      | 🔴 `#B60205` | Blocked by dependency              |
+| `wontfix`      | ⚪ `#FFFFFF` | Will not be addressed              |
+| `duplicate`    | ⚪ `#CFD3D7` | Duplicate of another issue         |
 
 ### Priority Labels
 
-| Label | Color | Description |
-|-------|-------|-------------|
-| `p0-critical` | 🔴 `#B60205` | Blocks other work |
-| `p1-high` | 🟠 `#D93F0B` | Core MVP feature |
-| `p2-medium` | 🟡 `#FBCA04` | Important but not blocking |
-| `p3-low` | 🟢 `#0E8A16` | Nice to have |
+| Label         | Color        | Description                |
+| ------------- | ------------ | -------------------------- |
+| `p0-critical` | 🔴 `#B60205` | Blocks other work          |
+| `p1-high`     | 🟠 `#D93F0B` | Core MVP feature           |
+| `p2-medium`   | 🟡 `#FBCA04` | Important but not blocking |
+| `p3-low`      | 🟢 `#0E8A16` | Nice to have               |
 
 ### Milestone Labels
 
-| Label | Color | Description |
-|-------|-------|-------------|
-| `m0-setup` | 🟢 `#C2E0C6` | Project Setup |
-| `m1-budget` | 🟢 `#C2E0C6` | Budget Management |
-| `m2-subscriptions` | 🟢 `#C2E0C6` | Subscription Tracking |
-| `m3-analytics` | 🟢 `#C2E0C6` | Dashboard & Analytics |
-| `m4-polish` | 🟢 `#C2E0C6` | Notifications & Polish |
-| `m5-launch` | 🟢 `#C2E0C6` | Launch Prep |
+| Label              | Color        | Description            |
+| ------------------ | ------------ | ---------------------- |
+| `m0-setup`         | 🟢 `#C2E0C6` | Project Setup          |
+| `m1-budget`        | 🟢 `#C2E0C6` | Budget Management      |
+| `m2-subscriptions` | 🟢 `#C2E0C6` | Subscription Tracking  |
+| `m3-analytics`     | 🟢 `#C2E0C6` | Dashboard & Analytics  |
+| `m4-polish`        | 🟢 `#C2E0C6` | Notifications & Polish |
+| `m5-launch`        | 🟢 `#C2E0C6` | Launch Prep            |
 
 ### Platform Labels
 
-| Label | Color | Description |
-|-------|-------|-------------|
-| `web` | 🔵 `#BFD4F2` | Next.js |
-| `mobile` | 🔵 `#BFD4F2` | Expo |
-| `api` | 🔵 `#BFD4F2` | tRPC / API |
-| `db` | 🔵 `#BFD4F2` | Database |
-| `ui` | 🔵 `#BFD4F2` | Shared UI |
+| Label    | Color        | Description |
+| -------- | ------------ | ----------- |
+| `web`    | 🔵 `#BFD4F2` | Next.js     |
+| `mobile` | 🔵 `#BFD4F2` | Expo        |
+| `api`    | 🔵 `#BFD4F2` | tRPC / API  |
+| `db`     | 🔵 `#BFD4F2` | Database    |
+| `ui`     | 🔵 `#BFD4F2` | Shared UI   |

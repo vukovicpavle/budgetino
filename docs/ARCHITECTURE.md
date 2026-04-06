@@ -53,27 +53,27 @@ Budgetino is a cross-platform (web + mobile) budget and subscription management 
 
 ## Tech Stack
 
-| Layer | Technology | Version | Purpose |
-|-------|-----------|---------|---------|
-| **Web Framework** | Next.js | 15 | SSR, App Router, API routes |
-| **Mobile Framework** | Expo | 55 | Cross-platform iOS/Android |
-| **Language** | TypeScript | 5.x | Type safety across all code |
-| **UI (Web)** | shadcn/ui + Tailwind CSS | Latest | Composable web components |
-| **UI (Mobile)** | NativeWind + custom components | Latest | Tailwind-style on React Native |
-| **API** | tRPC | v11 | End-to-end type-safe API |
-| **Database** | PostgreSQL (Supabase) | 15+ | Primary data store |
-| **ORM** | Drizzle | Latest | Type-safe queries, migrations |
-| **Auth** | Supabase Auth | Latest | OAuth (GitHub), session management |
-| **Deployment (Web)** | Vercel | — | Hosting, edge functions |
-| **Deployment (Mobile)** | EAS (Expo) | — | Build & submit to stores |
-| **Monorepo** | Turborepo + pnpm | Latest | Build orchestration, remote caching |
-| **i18n (Web)** | next-intl | Latest | App Router-native, RSC-compatible |
-| **i18n (Mobile)** | i18next + react-i18next | Latest | Mature, widely used for RN |
-| **Locale detection** | expo-localization | Latest | Device locale for Expo |
-| **CI/CD** | GitHub Actions | — | Automated testing, deployment |
-| **Unit Testing** | Vitest | Latest | Fast unit tests |
-| **E2E (Web)** | Playwright | Latest | Browser automation |
-| **E2E (Mobile)** | Maestro | Latest | Mobile UI testing |
+| Layer                   | Technology                     | Version | Purpose                             |
+| ----------------------- | ------------------------------ | ------- | ----------------------------------- |
+| **Web Framework**       | Next.js                        | 15      | SSR, App Router, API routes         |
+| **Mobile Framework**    | Expo                           | 55      | Cross-platform iOS/Android          |
+| **Language**            | TypeScript                     | 5.x     | Type safety across all code         |
+| **UI (Web)**            | shadcn/ui + Tailwind CSS       | Latest  | Composable web components           |
+| **UI (Mobile)**         | NativeWind + custom components | Latest  | Tailwind-style on React Native      |
+| **API**                 | tRPC                           | v11     | End-to-end type-safe API            |
+| **Database**            | PostgreSQL (Supabase)          | 15+     | Primary data store                  |
+| **ORM**                 | Drizzle                        | Latest  | Type-safe queries, migrations       |
+| **Auth**                | Supabase Auth                  | Latest  | OAuth (GitHub), session management  |
+| **Deployment (Web)**    | Vercel                         | —       | Hosting, edge functions             |
+| **Deployment (Mobile)** | EAS (Expo)                     | —       | Build & submit to stores            |
+| **Monorepo**            | Turborepo + pnpm               | Latest  | Build orchestration, remote caching |
+| **i18n (Web)**          | next-intl                      | Latest  | App Router-native, RSC-compatible   |
+| **i18n (Mobile)**       | i18next + react-i18next        | Latest  | Mature, widely used for RN          |
+| **Locale detection**    | expo-localization              | Latest  | Device locale for Expo              |
+| **CI/CD**               | GitHub Actions                 | —       | Automated testing, deployment       |
+| **Unit Testing**        | Vitest                         | Latest  | Fast unit tests                     |
+| **E2E (Web)**           | Playwright                     | Latest  | Browser automation                  |
+| **E2E (Mobile)**        | Maestro                        | Latest  | Mobile UI testing                   |
 
 ---
 
@@ -162,30 +162,30 @@ api/
 
 ### Key Procedures
 
-| Router | Procedure | Type | Description |
-|--------|-----------|------|-------------|
-| `budget` | `create` | mutation | Create a new budget |
-| `budget` | `list` | query | List user's budgets |
-| `budget` | `getById` | query | Get budget with current spending |
-| `budget` | `update` | mutation | Update budget details |
-| `budget` | `delete` | mutation | Delete a budget |
-| `category` | `list` | query | List categories (with defaults) |
-| `category` | `create` | mutation | Create custom category |
-| `category` | `update` | mutation | Edit category (including defaults) |
-| `category` | `reorder` | mutation | Change category sort order |
-| `expense` | `create` | mutation | Add an expense |
-| `expense` | `list` | query | List expenses (filtered, paginated) |
-| `expense` | `update` | mutation | Edit an expense |
-| `expense` | `delete` | mutation | Delete an expense |
-| `subscription` | `create` | mutation | Add a subscription |
-| `subscription` | `list` | query | List active subscriptions |
-| `subscription` | `update` | mutation | Edit a subscription |
-| `subscription` | `cancel` | mutation | Deactivate a subscription |
-| `subscription` | `processDue` | mutation | Auto-create expenses for due subs |
-| `analytics` | `spendingByCategory` | query | Pie chart data |
-| `analytics` | `spendingOverTime` | query | Line chart data |
-| `analytics` | `budgetVsActual` | query | Budget utilization |
-| `analytics` | `subscriptionCost` | query | Total subscription cost breakdown |
+| Router         | Procedure            | Type     | Description                         |
+| -------------- | -------------------- | -------- | ----------------------------------- |
+| `budget`       | `create`             | mutation | Create a new budget                 |
+| `budget`       | `list`               | query    | List user's budgets                 |
+| `budget`       | `getById`            | query    | Get budget with current spending    |
+| `budget`       | `update`             | mutation | Update budget details               |
+| `budget`       | `delete`             | mutation | Delete a budget                     |
+| `category`     | `list`               | query    | List categories (with defaults)     |
+| `category`     | `create`             | mutation | Create custom category              |
+| `category`     | `update`             | mutation | Edit category (including defaults)  |
+| `category`     | `reorder`            | mutation | Change category sort order          |
+| `expense`      | `create`             | mutation | Add an expense                      |
+| `expense`      | `list`               | query    | List expenses (filtered, paginated) |
+| `expense`      | `update`             | mutation | Edit an expense                     |
+| `expense`      | `delete`             | mutation | Delete an expense                   |
+| `subscription` | `create`             | mutation | Add a subscription                  |
+| `subscription` | `list`               | query    | List active subscriptions           |
+| `subscription` | `update`             | mutation | Edit a subscription                 |
+| `subscription` | `cancel`             | mutation | Deactivate a subscription           |
+| `subscription` | `processDue`         | mutation | Auto-create expenses for due subs   |
+| `analytics`    | `spendingByCategory` | query    | Pie chart data                      |
+| `analytics`    | `spendingOverTime`   | query    | Line chart data                     |
+| `analytics`    | `budgetVsActual`     | query    | Budget utilization                  |
+| `analytics`    | `subscriptionCost`   | query    | Total subscription cost breakdown   |
 
 ---
 
@@ -240,13 +240,13 @@ Subscriptions with `is_active = true` are processed for auto-deduction:
 
 ### Frequency Options
 
-| Frequency | Calculation |
-|-----------|------------|
-| `weekly` | +7 days |
-| `biweekly` | +14 days |
-| `monthly` | +1 month |
-| `quarterly` | +3 months |
-| `yearly` | +1 year |
+| Frequency   | Calculation |
+| ----------- | ----------- |
+| `weekly`    | +7 days     |
+| `biweekly`  | +14 days    |
+| `monthly`   | +1 month    |
+| `quarterly` | +3 months   |
+| `yearly`    | +1 year     |
 
 ---
 
@@ -358,11 +358,11 @@ Subscriptions with `is_active = true` are processed for auto-deduction:
 
 ### Library Choices
 
-| Platform | Library | Rationale |
-|----------|---------|-----------|
-| **Web (Next.js)** | `next-intl` | Built for App Router, RSC-compatible, lightweight |
-| **Mobile (Expo)** | `i18next` + `react-i18next` + `expo-localization` | Mature ecosystem, works with React Native |
-| **Shared** | JSON locale files in `packages/shared` | Both apps consume the same translation keys |
+| Platform          | Library                                           | Rationale                                         |
+| ----------------- | ------------------------------------------------- | ------------------------------------------------- |
+| **Web (Next.js)** | `next-intl`                                       | Built for App Router, RSC-compatible, lightweight |
+| **Mobile (Expo)** | `i18next` + `react-i18next` + `expo-localization` | Mature ecosystem, works with React Native         |
+| **Shared**        | JSON locale files in `packages/shared`            | Both apps consume the same translation keys       |
 
 ### File Structure
 
@@ -425,13 +425,13 @@ const dateStr = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
 
 ### Why Turborepo over alternatives
 
-| Factor | Turborepo | pnpm workspaces alone | Nx |
-|--------|-----------|----------------------|-----|
-| Build orchestration | ✅ Parallel, dependency-aware | ❌ Manual | ✅ Full graph |
-| Caching | ✅ Local + free Vercel remote | ❌ None | ✅ Local + paid cloud |
-| Complexity | Low — single `turbo.json` | Minimal | High — steeper curve |
-| Vercel integration | ✅ Native (same company) | Manual | Plugin needed |
-| Solo dev overhead | Minimal | None | Significant |
+| Factor              | Turborepo                     | pnpm workspaces alone | Nx                    |
+| ------------------- | ----------------------------- | --------------------- | --------------------- |
+| Build orchestration | ✅ Parallel, dependency-aware | ❌ Manual             | ✅ Full graph         |
+| Caching             | ✅ Local + free Vercel remote | ❌ None               | ✅ Local + paid cloud |
+| Complexity          | Low — single `turbo.json`     | Minimal               | High — steeper curve  |
+| Vercel integration  | ✅ Native (same company)      | Manual                | Plugin needed         |
+| Solo dev overhead   | Minimal                       | None                  | Significant           |
 
 ### Key Configuration
 
@@ -445,8 +445,8 @@ const dateStr = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`;
     "dev": { "cache": false, "persistent": true },
     "lint": { "dependsOn": ["^build"] },
     "type-check": { "dependsOn": ["^build"] },
-    "test": { "dependsOn": ["^build"] }
-  }
+    "test": { "dependsOn": ["^build"] },
+  },
 }
 ```
 
