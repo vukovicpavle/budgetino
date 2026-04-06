@@ -4,19 +4,29 @@
   "private": true,
   "prettier": "@budgetino/prettier-config",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts",
+    "./schema": "./src/schema/index.ts"
   },
   "scripts": {
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "tsx src/seed.ts",
+    "db:studio": "drizzle-kit studio",
     "lint": "echo \"No lint configured yet\"",
     "type-check": "tsc --noEmit",
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.101.1"
+    "drizzle-orm": "^0.45.2",
+    "postgres": "^3.4.9"
   },
   "devDependencies": {
     "@budgetino/prettier-config": "workspace:*",
+    "@types/node": "^20",
+    "drizzle-kit": "^0.31.10",
     "rimraf": "^5.0.10",
+    "tsx": "^4.19.4",
     "typescript": "^5.7.3"
   }
 }

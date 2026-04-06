@@ -15,7 +15,11 @@
     "db:start": "supabase start",
     "db:stop": "supabase stop",
     "db:reset": "supabase db reset",
-    "db:status": "supabase status"
+    "db:status": "supabase status",
+    "db:generate": "pnpm --filter @budgetino/db db:generate",
+    "db:migrate": "pnpm --filter @budgetino/db db:migrate",
+    "db:seed": "pnpm --filter @budgetino/db db:seed",
+    "db:studio": "pnpm --filter @budgetino/db db:studio"
   },
   "devDependencies": {
     "turbo": "^2.9.3",

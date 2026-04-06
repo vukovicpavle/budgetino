@@ -1,1 +1,2 @@
-export { getSupabase } from './client';
+export { getDb } from './client';
+export * from './schema';
