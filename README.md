@@ -94,6 +94,59 @@ pnpm test
 pnpm lint
 ```
 
+### Supabase (Database)
+
+Budgetino uses [Supabase](https://supabase.com) for the database and authentication layer. Local development runs via Docker using the Supabase CLI.
+
+#### Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running
+- [Supabase CLI](https://supabase.com/docs/guides/cli/getting-started) installed (`brew install supabase/tap/supabase` on macOS)
+
+#### Local Development
+
+```bash
+# Start the local Supabase stack (PostgreSQL + Auth + Studio)
+pnpm db:start
+
+# Stop the local Supabase stack
+pnpm db:stop
+
+# Reset the local database
+pnpm db:reset
+
+# Check the status of the local Supabase services
+pnpm db:status
+```
+
+After running `pnpm db:start`, the following local services are available:
+
+| Service | URL |
+|---------|-----|
+| API / REST | `http://127.0.0.1:54321` |
+| Studio (UI) | `http://127.0.0.1:54323` |
+| Database | `postgresql://postgres:postgres@127.0.0.1:54322/postgres` |
+| Inbucket (email) | `http://127.0.0.1:54324` |
+
+#### Environment Setup
+
+Copy `.env.example` to `.env.local` and fill in the values:
+
+```bash
+cp .env.example .env.local
+```
+
+For **local development**, the values from `pnpm db:status` can be used directly. For **cloud/production**, retrieve the keys from the Supabase Dashboard → Project Settings → API.
+
+| Variable | Description |
+|----------|-------------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL (safe for browser) |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anonymous/public API key (safe for browser) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Service role key — **server-side only, never expose** |
+| `DATABASE_URL` | PostgreSQL connection string (used by Drizzle/migrations) |
+
+> **Security:** Never commit `.env.local` or any file containing real API keys. `.env.local` is gitignored by default.
+
 ## Milestones
 
 | # | Milestone | Timeline |
