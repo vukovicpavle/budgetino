@@ -22,3 +22,11 @@ export function getDb() {
 
   return _db;
 }
+
+export async function closeDb() {
+  if (_client) {
+    await _client.end();
+    _client = undefined;
+    _db = undefined;
+  }
+}
