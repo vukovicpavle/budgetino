@@ -5,6 +5,8 @@
  * allowing the locale to be swapped in the future.
  */
 
+import { defaultLocale } from './keys';
+
 /**
  * Format a number as a locale-aware currency string.
  *
@@ -16,7 +18,7 @@
 export function formatCurrency(
   amount: number,
   currencyCode: string,
-  locale: string = 'en'
+  locale: string = defaultLocale
 ): string {
   return new Intl.NumberFormat(locale, {
     style: 'currency',
@@ -32,20 +34,23 @@ export function formatCurrency(
  * formatNumber(1234567.89, 'en') // "1,234,567.89"
  * ```
  */
-export function formatNumber(value: number, locale: string = 'en'): string {
+export function formatNumber(
+  value: number,
+  locale: string = defaultLocale
+): string {
   return new Intl.NumberFormat(locale).format(value);
 }
 
 /**
  * Format a `Date` with the medium date style (e.g. "Apr 6, 2026").
  */
-export function formatDate(date: Date, locale: string = 'en'): string {
+export function formatDate(date: Date, locale: string = defaultLocale): string {
   return new Intl.DateTimeFormat(locale, { dateStyle: 'medium' }).format(date);
 }
 
 /**
  * Format a `Date` with a short time style (e.g. "8:11 AM").
  */
-export function formatTime(date: Date, locale: string = 'en'): string {
+export function formatTime(date: Date, locale: string = defaultLocale): string {
   return new Intl.DateTimeFormat(locale, { timeStyle: 'short' }).format(date);
 }

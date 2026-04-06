@@ -9,7 +9,7 @@ import type { Locale } from '@budgetino/shared/i18n';
 
 const deviceLocale = getLocales()[0]?.languageCode ?? defaultLocale;
 
-i18n.use(initReactI18next).init({
+void i18n.use(initReactI18next).init({
   resources: {
     en: { translation: en },
   },

@@ -1,4 +1,4 @@
-import en from './locales/en.json';
+import type EnMessages from './locales/en.json';
 
 export type Locale = 'en';
 
@@ -10,7 +10,7 @@ export const locales: Locale[] = ['en'];
  * Type representing the full translation message structure,
  * derived from the English locale file.
  */
-export type Messages = typeof en;
+export type Messages = typeof EnMessages;
 
 /**
  * Recursively builds dot-notation key paths from a nested object type.
