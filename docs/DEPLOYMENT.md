@@ -22,20 +22,21 @@ This document describes how to deploy **Budgetino web** to [Vercel](https://verc
 
 ## 2 — Configure Project Settings
 
-In the **Configure Project** screen (or later in *Project → Settings → General*), set the following overrides:
+In the **Configure Project** screen (or later in *Project → Settings → General*), use the following settings:
 
 | Setting | Value |
 |---|---|
-| **Root Directory** | `apps/web` |
+| **Root Directory** | *(leave blank — repo root)* |
 | **Framework Preset** | Next.js (auto-detected) |
 | **Build Command** | *(leave blank — uses `vercel.json`)* |
 | **Install Command** | *(leave blank — uses `vercel.json`)* |
 | **Output Directory** | *(leave blank — uses `vercel.json`)* |
 
-> **Why `apps/web`?**  
-> The repo is a Turborepo monorepo. Setting the root directory to `apps/web` tells Vercel
-> where the Next.js app lives. The `vercel.json` at the repository root overrides the build
-> and install commands to run Turbo so that all workspace dependencies are built first.
+> **Why repo root?**  
+> `vercel.json` lives at the repo root and uses repo-root-relative paths (e.g. `apps/web/.next`
+> for output, `pnpm turbo build --filter=web` for the build). Setting Root Directory to
+> `apps/web` would break these paths and cause Vercel to ignore the root-level config.
+> Keeping the project root at the repo root lets `vercel.json` drive everything.
 
 ---
 
@@ -100,7 +101,7 @@ pnpm dev:web
 
 | Problem | Fix |
 |---|---|
-| Build fails with "workspace not found" | Ensure **Root Directory** is set to `apps/web` in Vercel project settings |
+| Build fails with "workspace not found" | Ensure **Root Directory** is left blank (repo root) in Vercel project settings |
 | Missing env vars at runtime | Add them in *Vercel → Project → Settings → Environment Variables* and redeploy |
 | Preview deploy not triggered on PR | Check *Project → Settings → Git → Preview Branches* configuration |
 | Remote caching not working | Verify **Turborepo Remote Caching** is enabled in Vercel project settings |

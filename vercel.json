@@ -4,5 +4,5 @@
   "buildCommand": "pnpm turbo build --filter=web",
   "installCommand": "pnpm install --frozen-lockfile",
   "outputDirectory": "apps/web/.next",
-  "ignoreCommand": "npx turbo-ignore web"
+  "ignoreCommand": "npx turbo-ignore@1.13.3 web"
 }
