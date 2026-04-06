@@ -179,4 +179,4 @@ jobs:
             nextjs-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}-
 
       - name: Build
-        run: pnpm build
+        run: pnpm --filter web build
