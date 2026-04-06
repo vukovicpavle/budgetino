@@ -2,5 +2,11 @@
   "name": "@budgetino/typescript-config",
   "version": "0.0.0",
   "private": true,
-  "files": ["base.json", "nextjs.json", "react-library.json", "react-native.json", "library.json"]
+  "files": [
+    "base.json",
+    "nextjs.json",
+    "react-library.json",
+    "react-native.json",
+    "library.json"
+  ]
 }

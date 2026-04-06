@@ -30,7 +30,7 @@ Closes #<!-- issue number -->
 <!-- If applicable, add screenshots or screen recordings (especially for UI changes) -->
 
 | Web | Mobile |
-|-----|--------|
+| --- | ------ |
 |     |        |
 
 ## Testing
