@@ -12,6 +12,7 @@
     "eas-build:development": "pnpm exec eas build --platform all --profile development",
     "eas-build:preview": "pnpm exec eas build --platform all --profile preview",
     "eas-build:production": "pnpm exec eas build --platform all --profile production",
+    "lint": "eslint .",
     "type-check": "tsc --noEmit",
     "clean": "rimraf .expo expo-dist"
   },
@@ -28,9 +29,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@budgetino/eslint-config": "workspace:*",
     "@budgetino/typescript-config": "workspace:*",
     "@types/react": "~18.3.1",
     "eas-cli": "18.4.0",
+    "eslint": "^9",
     "rimraf": "^5.0.10",
     "typescript": "^5.7.3"
   }

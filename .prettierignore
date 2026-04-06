@@ -1,0 +1,9 @@
+node_modules
+.next
+.expo
+dist
+expo-dist
+.turbo
+coverage
+pnpm-lock.yaml
+.github/workflows/
