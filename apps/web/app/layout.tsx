@@ -1,8 +1,7 @@
+import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
-
-import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
 
 import './globals.css';
 

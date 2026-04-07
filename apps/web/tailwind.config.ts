@@ -1,5 +1,4 @@
 import sharedConfig from '@budgetino/tailwind-config';
-
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
