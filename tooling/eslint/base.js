@@ -24,13 +24,7 @@ module.exports = [
       'simple-import-sort/imports': [
         'warn',
         {
-          groups: [
-            ['^react', '^next', '^expo'],
-            ['^@?\\w'],
-            ['^@/'],
-            ['^\\.'],
-            ['^.*\\u0000$'],
-          ],
+          groups: [['^react', '^next', '^expo'], ['^@?\\w'], ['^@/'], ['^\\.']],
         },
       ],
       'simple-import-sort/exports': 'warn',
