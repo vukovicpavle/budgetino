@@ -10,10 +10,15 @@ export function GitHubSignInButton() {
       typeof window !== 'undefined'
         ? `${window.location.origin}/auth/callback`
         : undefined;
-    await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: { redirectTo },
     });
+
+    if (error) {
+      console.error('Failed to initiate GitHub OAuth sign-in', error);
+      throw error;
+    }
   }
 
   return <button onClick={handleSignIn}>{en.auth.signInWithGitHub}</button>;

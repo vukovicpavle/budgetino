@@ -23,11 +23,12 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "eslint": "^9",
+    "next": "^15",
     "rimraf": "^5.0.10",
     "typescript": "^5.7.3"
   },
   "peerDependencies": {
-    "next": "^15.5.14",
+    "next": "^15",
     "react": "*"
   },
   "peerDependenciesMeta": {

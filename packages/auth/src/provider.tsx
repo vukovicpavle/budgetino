@@ -143,9 +143,26 @@ export function AuthProvider({
           throw invalidUrlError;
         }
       }
+      const oauthError = url.searchParams.get('error');
+      if (oauthError) {
+        const oauthErrorDescription =
+          url.searchParams.get('error_description') ??
+          url.searchParams.get('error_code');
+        throw new Error(
+          oauthErrorDescription
+            ? `OAuth callback error: ${oauthError} (${oauthErrorDescription})`
+            : `OAuth callback error: ${oauthError}`
+        );
+      }
       const code = url.searchParams.get('code');
-      if (code) {
-        await supabase.auth.exchangeCodeForSession(code);
+      if (!code) {
+        throw new Error(
+          `Missing authorization code in callback URL passed to exchangeCodeForSession: ${safeUrl}`
+        );
+      }
+      const { error } = await supabase.auth.exchangeCodeForSession(code);
+      if (error) {
+        throw error;
       }
     },
     [supabase]

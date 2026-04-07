@@ -211,9 +211,6 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.101.1
         version: 2.101.1
-      next:
-        specifier: ^15.5.14
-        version: 15.5.14(@playwright/test@1.59.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react:
         specifier: '*'
         version: 19.2.4
@@ -233,6 +230,9 @@ importers:
       eslint:
         specifier: ^9
         version: 9.39.4(jiti@1.21.7)
+      next:
+        specifier: ^15
+        version: 15.5.14(@playwright/test@1.59.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       rimraf:
         specifier: ^5.0.10
         version: 5.0.10
