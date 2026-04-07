@@ -1,10 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
+import { useAuth } from '@budgetino/auth/provider';
 import { formatCurrency, formatDate } from '@budgetino/shared/i18n';
 
 export default function HomeScreen() {
   const { t } = useTranslation();
+  const { user, signOut } = useAuth();
 
   return (
     <View className="flex-1 items-center justify-center">
@@ -16,6 +18,16 @@ export default function HomeScreen() {
         })}
       </Text>
       <Text>{formatDate(new Date())}</Text>
+      {user && (
+        <TouchableOpacity
+          className="mt-6 rounded-lg bg-gray-800 px-6 py-3"
+          onPress={signOut}
+        >
+          <Text className="text-base font-semibold text-white">
+            {t('auth.signOut')}
+          </Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
